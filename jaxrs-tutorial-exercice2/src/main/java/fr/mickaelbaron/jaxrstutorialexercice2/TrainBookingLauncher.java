@@ -1,4 +1,4 @@
-package fr.mickaelbaron.jaxrstutorialexercice1;
+package fr.mickaelbaron.jaxrstutorialexercice2;
 
 import java.net.URI;
 import java.util.logging.Level;
@@ -13,19 +13,19 @@ import org.glassfish.jersey.server.ResourceConfig;
 /**
  * @author Mickael BARON (baron.mickael@gmail.com)
  */
-public class HelloLauncher {
+public class TrainBookingLauncher {
 
 	public static final URI BASE_URI = getBaseURI();
 
 	private static URI getBaseURI() {
-		return UriBuilder.fromUri("http://localhost/api/").port(9991).build();
+		return UriBuilder.fromUri("http://localhost/api/").port(9992).build();
 	}
 
 	public static void main(String[] args) {
 		ResourceConfig rc = new ResourceConfig();
-		rc.registerClasses(HelloResource.class);
+		rc.registerClasses(TrainResource.class);
 		rc.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, Level.WARNING.getName());
-		
+
 		try {
 			HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
 			server.start();

@@ -18,7 +18,30 @@ import org.junit.Test;
 /**
  * @author Mickael BARON (baron.mickael@gmail.com)
  */
-public class TrainResourceIntegrationTest {
+public class TrainResourceIntegrationTest extends JerseyTest {
+
+	@Override
+	protected Application configure() {
+		ResourceConfig resourceConfig = new ResourceConfig(TrainResource.class);
+		resourceConfig.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, Level.WARNING.getName());
+		return resourceConfig;
+	}
+
+	@Test
+	public void getTrainsTest() {
+		// Given
+
+		// When
+		Response response = target("/trains").request(MediaType.APPLICATION_JSON_TYPE).get();
+
+		// Then
+		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
+		List<Train> readEntities = response.readEntity(new GenericType<List<Train>>() {
+		});
+		Assert.assertNotNull(readEntities);
+		Assert.assertEquals(3, readEntities.size());
+		Assert.assertTrue(readEntities.stream().anyMatch(current -> "TR123".equals(current.getId())));
+	}
 
 	@Test
 	public void getTrainTest() {
@@ -26,8 +49,8 @@ public class TrainResourceIntegrationTest {
 		String trainId = "TR123";
 
 		// When
-		// TODO: invoquer le service dédié à la récupération d'un train
-		// par son identifiant fonctionnel (trainId = "TR123").
+		Response response = target("/trains").path("numTrain-" + trainId).request(MediaType.APPLICATION_JSON_TYPE)
+				.get();
 
 		// Then
 		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
@@ -49,11 +72,13 @@ public class TrainResourceIntegrationTest {
 				.queryParam("arrival", arrival).queryParam("departureTime", departureTime)
 				.request(MediaType.APPLICATION_JSON_TYPE).get();
 
-        // Then
-        // TODO: assertions à respecter ?
-        //  * le code de statut doit être `200` ;
-        //  * la réponse doit contenir trois paramètres d'en-tête qui correspondent 
-        //    aux paramètres de la requête initiale (`departure`, `arrival` et `departureTime`) ;
-        //  * le contenu doit être une liste de trains d'une taille de deux éléments.
+		// Then
+		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
+		Assert.assertEquals(departure, response.getHeaderString("departure"));
+		Assert.assertEquals(arrival, response.getHeaderString("arrival"));
+		Assert.assertEquals(departureTime, response.getHeaderString("departureTime"));
+		List<Train> readEntities = response.readEntity(new GenericType<List<Train>>() {});
+		Assert.assertNotNull(readEntities);
+		Assert.assertEquals(2, readEntities.size());
 	}
 }

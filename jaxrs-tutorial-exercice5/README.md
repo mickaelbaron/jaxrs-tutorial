@@ -60,6 +60,12 @@ Vous remarquerez que le projet ne démarre pas du fait de l'absence de certaines
 $ mvn clean package
 ...
 $ java -cp "target/jaxrstutorialexercice5.jar:target/dependency/*" fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingLauncher
+nov. 10, 2018 4:57:35 PM org.glassfish.grizzly.http.server.NetworkListener start
+INFO: Started listener bound to [localhost:9993]
+nov. 10, 2018 4:57:35 PM org.glassfish.grizzly.http.server.HttpServer start
+INFO: [HttpServer] Started.
+Jersey app started with WADL available at http://localhost:9993/api/
+Hit enter to stop it...
 ```
 
 ## Étapes à suivre pour effectuer un déploiement sur le serveur d'applications Tomcat
@@ -133,6 +139,12 @@ docker pull tomcat:9-jre11-slim
 
 ```sh
 docker run --rm --name helloworldrestservice-tomcat -v $(pwd)/target/jaxrstutorialexercice5.war:/usr/local/tomcat/webapps/jaxrstutorialexercice5.war -it -p 8080:8080 tomcat:9-jre11-slim
+Using CATALINA_BASE:   /usr/local/tomcat
+Using CATALINA_HOME:   /usr/local/tomcat
+Using CATALINA_TMPDIR: /usr/local/tomcat/temp
+Using JRE_HOME:        /docker-java-home
+Using CLASSPATH:       /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar
+...
 ```
 
 * Tester le service web REST déployé avec CURL.

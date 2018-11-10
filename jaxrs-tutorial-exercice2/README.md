@@ -1,6 +1,6 @@
 # Exercice 2 (JAX-RS) : développer un service web REST « Interrogation et réservation de billet de train »
 
-Le service web REST de ce deuxième exercice consiste à créer un système CRUD pour l'interrogation et la réservation de billet de train. Les ressources manipulées par ce service web REST est donc un **train** et une **réservation de billet de train** pour un train donné. Le service web REST doit pouvoir lister l'ensemble des trains, lister les trains qui satisfont un critère de recherche (ville de départ, ville d'arrivée, jour de départ et un intervalle de temps) puis de créer, lister et supprimer une réservation de billet de train.
+Le service web REST de ce deuxième exercice consiste à créer un système CRUD pour l'interrogation et la réservation de billet de train. Les ressources manipulées par ce service web REST est donc un **train** et une **réservation de billet de train** pour un train donné. Le service web REST doit pouvoir lister l'ensemble des trains, lister les trains qui satisfont un critère de recherche (ville de départ, ville d'arrivée, jour de départ et un intervalle de temps) puis de créer, lister et supprimer une réservation de billet de train. 
 
 Nous insisterons sur la mise en place du service web REST et non sur le code métier (le code Java dans le corps des méthodes est « sans importance »). Les formats supportés par les deux ressources seront de l'XML et du JSON.
 

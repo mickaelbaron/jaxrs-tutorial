@@ -246,7 +246,7 @@ $ curl --header "Accept: application/json" http://localhost:9992/api/trains
 
 Vous constatez sur le résultat JSON que le nom des clés correspond exactement au nom des attributs de la classe Java `Train`.
 
-* Modifier la classe `Train` de telle sorte d'obtenir une clé `departure_time` au lieu de `departureTime` tout en respectant les conventions de nommage Java.
+* Modifier la classe `Train` de telle sorte d'obtenir une clé `departure_time` (dans le format JSON) au lieu de `departureTime` tout en respectant les conventions de nommage Java.
 
 ```java
 @XmlRootElement(name = "train")
@@ -258,7 +258,7 @@ public class Train {
 
     private String arrival;
 
-    // TODO: le nom de la clé doit être departure_time
+    @JsonProperty("departure_time")
     private int departureTime; // Format : 1230 = 12h30
     ...
 }
@@ -295,7 +295,23 @@ $ curl --header "Accept: application/json" http://localhost:9992/api/trains/sear
 [{"id":"TR123","departure":"Poitiers","arrival":"Paris","departure_time":1250},{"id":"AX127","departure":"Poitiers","arrival":"Paris","departure_time":1420}]
 ```
 
-Nous allons maintenant nous occuper à implémenter le service dédié à la **réservation de billet de train** pour un train donné. La classe `TrainBooking` utilisée pour modéliser une réservation de billet est déjà présente dans le projet. Elle contient un attribut `String id` (identifiant fonctionnel d'une réservation de billet), un attribut `String trainId` (la clé étrangère du train) et un attribut `int numberPlaces` pour le nombre de place à réserver. La classe `BookTrainResource` est utilisée pour implémenter le service de réservation de billet.
+Nous allons maintenant nous occuper à implémenter le service dédié à la **réservation de billet de train** pour un train donné. La classe `TrainBooking` utilisée pour modéliser une réservation de billet est déjà présente dans le projet. Elle contient un attribut `String id` (identifiant fonctionnel d'une réservation de billet), un attribut `String trainId` (la clé étrangère du train) et un attribut `int numberPlaces` pour le nombre de place à réserver. Toutefois, le paramétrage  La classe `BookTrainResource` est utilisée pour implémenter le service de réservation de billet.
+
+* Modifier la classe `TrainBooking` de telle sorte d'obtenir une clé `current_train` (dans le format JSON) au lieu de `trainId` et une clé `number_places` (dans le format JSON) au lieu de `numberPlaces`.
+
+```java
+@XmlRootElement(name = "trainbooking")
+public class TrainBooking {
+
+    private String id;
+
+    // TODO: le nom de la clé JSON doit être current_train.
+    private String trainId;
+
+    // TODO: le nom de la clé JSON doit être number_places.
+    private int numberPlaces;
+    ...
+```
 
 * Créer la classe `BookTrainResource` (dans le package `fr.mickaelbaron.jaxrstutorialexercice2`). Quatre méthodes sont à définir. La première `createTrainBooking` est invoquée pour la création d'une réservation de billet. La deuxième `getTrainBookings` est utilisée pour lister l'ensemble des réservations. La troisième `getTrainBooking` permet de retourner les informations d'une réservation à partir d'un numéro de réservation. Finalement `removeBookTrain` permet de supprimer une réservation.
 

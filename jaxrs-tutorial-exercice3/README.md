@@ -118,7 +118,7 @@ Nous allons maintenant implémenter les tests d'intégration concernant la resso
 * Ouvrir la classe `TrainBookingResourceIntegrationTest` et compléter le code afin que le framework de test **Test-Framework** soit supporté.
 
 ```java
-public class TrainResourceIntegrationTest extends ??? {
+public class TrainBookingResourceIntegrationTest extends ??? {
 
     @Override
     protected Application configure() {

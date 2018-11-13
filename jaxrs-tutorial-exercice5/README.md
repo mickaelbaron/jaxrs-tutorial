@@ -2,7 +2,7 @@
 
 Ce cinquième exercice s'intéresse au déploiement du service web REST développé dans les précédents exercices. Nous montrerons le déploiement comme une application Java classique (exécuter depuis un jar) et un déploiement sur le serveur d'application Tomcat (déployer un fichier war). Nous ferons abstraction de l'environnement de développement Eclipse afin d'être le plus proche de l'environnement de production.
 
-Le projet contient tout le code du service web REST
+Le projet contient tout le code du service web REST.
 
 ## But
 
@@ -135,7 +135,7 @@ mvn clean package -P war
 docker pull tomcat:9-jre11-slim
 ```
 
-* Enfin, saisir la ligne de commande suivante pour créer un conteneur Docker qui permettra de démarrer une instance de Tomcat. Le fichier `jaxrstutorialexercice5.war` contient tous les codes et dépendances de ce projet.
+* Enfin, saisir la ligne de commande suivante pour créer un conteneur Docker qui permettra de démarrer une instance de Tomcat. Le fichier _jaxrstutorialexercice5.war_ contient tous les codes et dépendances de ce projet.
 
 ```sh
 docker run --rm --name helloworldrestservice-tomcat -v $(pwd)/target/jaxrstutorialexercice5.war:/usr/local/tomcat/webapps/jaxrstutorialexercice5.war -it -p 8080:8080 tomcat:9-jre11-slim

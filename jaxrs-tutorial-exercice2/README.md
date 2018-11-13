@@ -1,6 +1,6 @@
 # Exercice 2 (JAX-RS) : développer un service web REST « Interrogation et réservation de billet de train »
 
-Le service web REST de ce deuxième exercice consiste à créer un système CRUD pour l'interrogation et la réservation de billet de train. Les ressources manipulées par ce service web REST est donc un **train** et une **réservation de billet de train** pour un train donné. Le service web REST doit pouvoir lister l'ensemble des trains, lister les trains qui satisfont un critère de recherche (ville de départ, ville d'arrivée, jour de départ et un intervalle de temps) puis de créer, lister et supprimer une réservation de billet de train. 
+Le service web REST de ce deuxième exercice consiste à créer un système CRUD pour l'interrogation et la réservation de billet de train. Les ressources manipulées par ce service web REST est donc un **train** et une **réservation de billet de train** pour un train donné. Le service web REST doit pouvoir lister l'ensemble des trains, lister les trains qui satisfont un critère de recherche (ville de départ, ville d'arrivée, jour de départ et un intervalle de temps) puis de créer, lister et supprimer une réservation de billet de train.
 
 Nous insisterons sur la mise en place du service web REST et non sur le code métier (le code Java dans le corps des méthodes est « sans importance »). Les formats supportés par les deux ressources seront de l'XML et du JSON.
 
@@ -41,7 +41,7 @@ public class Train {
         this.id = pId;
         this.departure = departure;
         this.arrival = arrival;
-    this.departureTime = departureTime;
+        this.departureTime = departureTime;
     }
 
     public String getId() {
@@ -124,6 +124,7 @@ public class TrainResource {
         //   2/ un sous ensemble de la liste des trains 
         //      (exemple : `TrainBookingDB.getTrains().subList(0, 2)`)
     }
+}
 ```
 
 * Créer la classe `TrainBookingLauncher` utilisée pour tester ce service web REST.
@@ -186,7 +187,7 @@ SEVERE: MessageBodyWriter not found for media type=application/xml, type=class j
 
 Cette erreur indique que la classe `Train` ne contient pas les informations nécessaires pour transformer un objet en XML (XML est le format choisi dans l'ordre d'apparition de l'annotation `@Produces`). Pour une sérialisation Java <=> XML, chaque classe doit être au moins annotée à la racine pour activer le mapping entre l'XML Schema et les attributs de la classe.
 
-* Editer la classe `Train` et ajouter l'annotation suivante
+* Éditer la classe `Train` et ajouter l'annotation suivante
 
 ```java
 @XmlRootElement(name = "train")
@@ -228,7 +229,7 @@ nov. 06, 2018 7:30:14 PM org.glassfish.jersey.message.internal.WriterInterceptor
 SEVERE: MessageBodyWriter not found for media type=application/json, type=class java.util.ArrayList, genericType=java.util.List<fr.mickaelbaron.jaxrstutorialexercice2.Train>.
 ```
 
-* Editer le fichier _pom.xml_ et ajouter la dépendance suivante.
+* Éditer le fichier _pom.xml_ et ajouter la dépendance suivante.
 
 ```xml
 <dependency>
@@ -237,7 +238,7 @@ SEVERE: MessageBodyWriter not found for media type=application/json, type=class 
 </dependency>
 ```
 
-* Exécuter de nouveau la classe `TrainBookingLauncher` puis éxecuter de nouveau la commande CURL précédente.
+* Exécuter de nouveau la classe `TrainBookingLauncher` puis relancer la commande CURL précédente.
 
 ```sh
 $ curl --header "Accept: application/json" http://localhost:9992/api/trains
@@ -246,7 +247,7 @@ $ curl --header "Accept: application/json" http://localhost:9992/api/trains
 
 Vous constatez sur le résultat JSON que le nom des clés correspond exactement au nom des attributs de la classe Java `Train`.
 
-* Modifier la classe `Train` de telle sorte d'obtenir une clé `departure_time` au lieu de `departureTime` tout en respectant les conventions de nommage Java.
+* Modifier la classe `Train` de telle sorte d'obtenir une clé `departure_time` (dans le format JSON) au lieu de `departureTime` tout en respectant les conventions de nommage Java.
 
 ```java
 @XmlRootElement(name = "train")
@@ -258,7 +259,7 @@ public class Train {
 
     private String arrival;
 
-    // TODO: le nom de la clé doit être departure_time
+    @JsonProperty("departure_time")
     private int departureTime; // Format : 1230 = 12h30
     ...
 }
@@ -295,7 +296,23 @@ $ curl --header "Accept: application/json" http://localhost:9992/api/trains/sear
 [{"id":"TR123","departure":"Poitiers","arrival":"Paris","departure_time":1250},{"id":"AX127","departure":"Poitiers","arrival":"Paris","departure_time":1420}]
 ```
 
-Nous allons maintenant nous occuper à implémenter le service dédié à la **réservation de billet de train** pour un train donné. La classe `TrainBooking` utilisée pour modéliser une réservation de billet est déjà présente dans le projet. Elle contient un attribut `String id` (identifiant fonctionnel d'une réservation de billet), un attribut `String trainId` (la clé étrangère du train) et un attribut `int numberPlaces` pour le nombre de place à réserver. La classe `BookTrainResource` est utilisée pour implémenter le service de réservation de billet.
+Nous allons maintenant nous occuper à implémenter le service dédié à la **réservation de billet de train** pour un train donné. La classe `TrainBooking` utilisée pour modéliser une réservation de billet est déjà présente dans le projet. Elle contient un attribut `String id` (identifiant fonctionnel d'une réservation de billet), un attribut `String trainId` (la clé étrangère du train) et un attribut `int numberPlaces` pour le nombre de place à réserver. Toutefois, le paramétrage  La classe `BookTrainResource` est utilisée pour implémenter le service de réservation de billet.
+
+* Modifier la classe `TrainBooking` de telle sorte d'obtenir une clé `current_train` (dans le format JSON) au lieu de `trainId` et une clé `number_places` (dans le format JSON) au lieu de `numberPlaces`.
+
+```java
+@XmlRootElement(name = "trainbooking")
+public class TrainBooking {
+
+    private String id;
+
+    // TODO: le nom de la clé JSON doit être current_train.
+    private String trainId;
+
+    // TODO: le nom de la clé JSON doit être number_places.
+    private int numberPlaces;
+    ...
+```
 
 * Créer la classe `BookTrainResource` (dans le package `fr.mickaelbaron.jaxrstutorialexercice2`). Quatre méthodes sont à définir. La première `createTrainBooking` est invoquée pour la création d'une réservation de billet. La deuxième `getTrainBookings` est utilisée pour lister l'ensemble des réservations. La troisième `getTrainBooking` permet de retourner les informations d'une réservation à partir d'un numéro de réservation. Finalement `removeBookTrain` permet de supprimer une réservation.
 

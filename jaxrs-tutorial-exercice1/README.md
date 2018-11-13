@@ -7,7 +7,7 @@ Le service web REST de ce premier exercice fournit un accès à la ressource «�
 * Développer un service web REST à partir d'une classe Java.
 * Déployer le service web REST comme une application Java classique.
 * Afficher le contrat de description WADL.
-* Tester le service web REST avec CURL.
+* Tester le service web REST avec **cURL**.
 
 ## Étapes à suivre
 
@@ -106,7 +106,7 @@ Ce service web REST n'est pas complet puisqu'il n'est pas possible de paramétre
     }
 ```
 
-* Exécuter de nouveau la classe `HelloLauncher` et depuis votre navigateur web saisir l'URL permettant d'invoquer ce nouveau service web REST (requête GET via l'URL <http://localhost:9991/api/hello/ENSMA>). Malheureusement, le navigateur web ne permet pas de préciser la valeur du paramètre d'en-tête `name`. Nous utiliserons donc l'outil en ligne de commande CURL pour construire des requêtes HTTP complexes (disponible à l'adresse suivante : [http://curl.haxx.se/)](http://curl.haxx.se/)).
+* Exécuter de nouveau la classe `HelloLauncher` et depuis votre navigateur web saisir l'URL permettant d'invoquer ce nouveau service web REST (requête GET via l'URL <http://localhost:9991/api/hello/ENSMA>). Malheureusement, le navigateur web ne permet pas de préciser la valeur du paramètre d'en-tête `name`. Nous utiliserons donc l'outil en ligne de commande **cURL** pour construire des requêtes HTTP complexes.
 
 * Depuis une invite de commande saisir la commande suivante :
 
@@ -128,7 +128,7 @@ Ce service web REST n'est toujours pas complet puisque nous aimerions retourner 
     }
 ```
 
-* Exécuter de nouveau la classe `HelloLauncher` puis saisir la ligne de commande CURL suivante pour envoyer une requête avec les bons paramètres et détailler le retour de la réponse.
+* Exécuter de nouveau la classe `HelloLauncher` puis saisir la ligne de commande **cURL** suivante pour envoyer une requête avec les bons paramètres et détailler le retour de la réponse.
 
 ```sh
 $ curl --header "name:Mickael BARON" http://localhost:9991/api/hello/withheaders/ENSMA -v

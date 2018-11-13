@@ -41,7 +41,7 @@ public class Train {
         this.id = pId;
         this.departure = departure;
         this.arrival = arrival;
-    this.departureTime = departureTime;
+        this.departureTime = departureTime;
     }
 
     public String getId() {
@@ -124,6 +124,7 @@ public class TrainResource {
         //   2/ un sous ensemble de la liste des trains 
         //      (exemple : `TrainBookingDB.getTrains().subList(0, 2)`)
     }
+}
 ```
 
 * Créer la classe `TrainBookingLauncher` utilisée pour tester ce service web REST.
@@ -186,7 +187,7 @@ SEVERE: MessageBodyWriter not found for media type=application/xml, type=class j
 
 Cette erreur indique que la classe `Train` ne contient pas les informations nécessaires pour transformer un objet en XML (XML est le format choisi dans l'ordre d'apparition de l'annotation `@Produces`). Pour une sérialisation Java <=> XML, chaque classe doit être au moins annotée à la racine pour activer le mapping entre l'XML Schema et les attributs de la classe.
 
-* Editer la classe `Train` et ajouter l'annotation suivante
+* Éditer la classe `Train` et ajouter l'annotation suivante
 
 ```java
 @XmlRootElement(name = "train")
@@ -228,7 +229,7 @@ nov. 06, 2018 7:30:14 PM org.glassfish.jersey.message.internal.WriterInterceptor
 SEVERE: MessageBodyWriter not found for media type=application/json, type=class java.util.ArrayList, genericType=java.util.List<fr.mickaelbaron.jaxrstutorialexercice2.Train>.
 ```
 
-* Editer le fichier _pom.xml_ et ajouter la dépendance suivante.
+* Éditer le fichier _pom.xml_ et ajouter la dépendance suivante.
 
 ```xml
 <dependency>
@@ -237,7 +238,7 @@ SEVERE: MessageBodyWriter not found for media type=application/json, type=class 
 </dependency>
 ```
 
-* Exécuter de nouveau la classe `TrainBookingLauncher` puis éxecuter de nouveau la commande CURL précédente.
+* Exécuter de nouveau la classe `TrainBookingLauncher` puis relancer la commande CURL précédente.
 
 ```sh
 $ curl --header "Accept: application/json" http://localhost:9992/api/trains

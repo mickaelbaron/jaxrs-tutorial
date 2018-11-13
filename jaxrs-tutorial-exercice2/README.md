@@ -161,7 +161,7 @@ public class TrainBookingLauncher {
 }
 ```
 
-* Exécuter la classe `TrainBookingLauncher` puis à partir de CURL invoquer le service web permettant de récupérer la liste de tous les trains.
+* Exécuter la classe `TrainBookingLauncher` puis à partir de **cURL** invoquer le service web permettant de récupérer la liste de tous les trains.
 
 ```sh
 $ curl http://localhost:9992/api/trains -v
@@ -178,7 +178,7 @@ $ curl http://localhost:9992/api/trains -v
 * Closing connection 0
 ```
 
-Comme observé sur le retour de la commande CURL, une erreur 500 (*Internal Server Error*) est retournée. Sur la console du serveur, le message suivant a du être généré.
+Comme observé sur le retour de la commande **cURL**, une erreur 500 (*Internal Server Error*) est retournée. Sur la console du serveur, le message suivant a du être généré.
 
 ```sh
 nov. 06, 2018 6:29:44 PM org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor aroundWriteTo
@@ -196,7 +196,7 @@ public class Train {
 }
 ```
 
-* Exécuter de nouveau la classe `TrainBookingLauncher` puis à partir de CURL invoquer le service web permettant de récupérer la liste de tous les trains. Comme montré ci-dessous, la liste des trains est obtenue via un format XML.
+* Exécuter de nouveau la classe `TrainBookingLauncher` puis à partir de **cURL** invoquer le service web permettant de récupérer la liste de tous les trains. Comme montré ci-dessous, la liste des trains est obtenue via un format XML.
 
 ```sh
 $ curl http://localhost:9992/api/trains
@@ -222,7 +222,7 @@ $ curl --header "Accept:application/json" http://localhost:9992/api/trains -v
 * Closing connection 0
 ```
 
-Comme observé sur le retour de la commande CURL, une erreur 500 est retournée. Sur la console du serveur, le message est identique à la précédente erreur pour le format XML. En d'autres termes, Jersey ne sait pas comment transformer un objet Java en JSON. Pour résoudre cette absence, il suffit d'ajouter la dépendance de la bibliothèque Jackson au fichier _pom.xml_.
+Comme observé sur le retour de la commande **cURL**, une erreur 500 est retournée. Sur la console du serveur, le message est identique à la précédente erreur pour le format XML. En d'autres termes, Jersey ne sait pas comment transformer un objet Java en JSON. Pour résoudre cette absence, il suffit d'ajouter la dépendance de la bibliothèque Jackson au fichier _pom.xml_.
 
 ```sh
 nov. 06, 2018 7:30:14 PM org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor aroundWriteTo
@@ -238,7 +238,7 @@ SEVERE: MessageBodyWriter not found for media type=application/json, type=class 
 </dependency>
 ```
 
-* Exécuter de nouveau la classe `TrainBookingLauncher` puis relancer la commande CURL précédente.
+* Exécuter de nouveau la classe `TrainBookingLauncher` puis relancer la commande **cURL** précédente.
 
 ```sh
 $ curl --header "Accept: application/json" http://localhost:9992/api/trains
@@ -396,7 +396,7 @@ public class TrainResource {
 }
 ```
 
-* Exécuter la classe `BookTrainMain` et à partir de CURL invoquer chaque service lié à la réservation de billet de train qui ont été implémentés dans les quatre méthodes `createTrainBooking`, `getTrainBookings`, `getTrainBooking` et `removeTrainBooking`.
+* Exécuter la classe `BookTrainMain` et à partir de **cURL** invoquer chaque service lié à la réservation de billet de train qui ont été implémentés dans les quatre méthodes `createTrainBooking`, `getTrainBookings`, `getTrainBooking` et `removeTrainBooking`.
 
 ```sh
 # Récupérer la liste des trains.

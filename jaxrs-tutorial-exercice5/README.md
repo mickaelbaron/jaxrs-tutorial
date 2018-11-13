@@ -147,7 +147,7 @@ Using CLASSPATH:       /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin
 ...
 ```
 
-* Tester le service web REST déployé avec CURL.
+* Tester le service web REST déployé avec **cURL**.
 
 ```sh
 $ curl --header "Accept: application/xml" http://localhost:8080/jaxrstutorialexercice5/api/trains

@@ -110,7 +110,7 @@ Ce service web REST n'est pas complet puisqu'il n'est pas possible de paramétre
 
 * Depuis une invite de commande saisir la commande suivante :
 
-```sh
+```bash
 $ curl --header "name:Mickael BARON" http://localhost:9991/api/hello/ENSMA
 Bonjour ENSMA de la part de Mickael BARON
 ```
@@ -130,7 +130,7 @@ Ce service web REST n'est toujours pas complet puisque nous aimerions retourner 
 
 * Exécuter de nouveau la classe `HelloLauncher` puis saisir la ligne de commande **cURL** suivante pour envoyer une requête avec les bons paramètres et détailler le retour de la réponse.
 
-```sh
+```bash
 $ curl --header "name:Mickael BARON" http://localhost:9991/api/hello/withheaders/ENSMA -v
 *   Trying ::1...
 * TCP_NODELAY set

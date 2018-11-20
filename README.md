@@ -8,7 +8,7 @@ Chaque exercice est fourni dans un dossier avec à l'intérieur un projet Java M
 
 > Ce dépôt est utilisé dans le cadre d'un cours sur les architectures orientées services que je dispense à l'[ISAE-ENSMA](https://www.ensma.fr) et à l'[Université de Poitiers](http://www.univ-poitiers.fr/) en français. Tous les supports de cours et tutoriaux sont disponibles sur ma page Developpez.com : [https://mbaron.developpez.com](https://mbaron.developpez.com/#page_soa).
 
-# Prérequis logiciels
+## Prérequis logiciels
 
 Avant de démarrer cette série d'exercices sur l'utilisation de l'API JAX-RS, veuillez préparer votre environnement de développement en installant les outils suivants :
 
@@ -18,7 +18,7 @@ Avant de démarrer cette série d'exercices sur l'utilisation de l'API JAX-RS, v
 * [cURL](https://curl.haxx.se "cURL") ;
 * [Docker (exercice 5)](https://www.docker.com/ "Docker").
 
-# Ressources et remerciements
+## Ressources et remerciements
 
 Retrouver les précédentes leçons :
 

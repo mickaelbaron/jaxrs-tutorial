@@ -161,9 +161,9 @@ public class TrainBookingLauncher {
 }
 ```
 
-* Exécuter la classe `TrainBookingLauncher` puis à partir de CURL invoquer le service web permettant de récupérer la liste de tous les trains.
+* Exécuter la classe `TrainBookingLauncher` puis à partir de **cURL** invoquer le service web permettant de récupérer la liste de tous les trains.
 
-```sh
+```bash
 $ curl http://localhost:9992/api/trains -v
 * Connected to localhost (127.0.0.1) port 9992 (#0)
 > GET /api/trains HTTP/1.1
@@ -178,9 +178,9 @@ $ curl http://localhost:9992/api/trains -v
 * Closing connection 0
 ```
 
-Comme observé sur le retour de la commande CURL, une erreur 500 (*Internal Server Error*) est retournée. Sur la console du serveur, le message suivant a du être généré.
+Comme observé sur le retour de la commande **cURL**, une erreur 500 (*Internal Server Error*) est retournée. Sur la console du serveur, le message suivant a du être généré.
 
-```sh
+```bash
 nov. 06, 2018 6:29:44 PM org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor aroundWriteTo
 SEVERE: MessageBodyWriter not found for media type=application/xml, type=class java.util.ArrayList, genericType=java.util.List<fr.mickaelbaron.jaxrstutorialexercice2.Train>.
 ```
@@ -196,9 +196,9 @@ public class Train {
 }
 ```
 
-* Exécuter de nouveau la classe `TrainBookingLauncher` puis à partir de CURL invoquer le service web permettant de récupérer la liste de tous les trains. Comme montré ci-dessous, la liste des trains est obtenue via un format XML.
+* Exécuter de nouveau la classe `TrainBookingLauncher` puis à partir de **cURL** invoquer le service web permettant de récupérer la liste de tous les trains. Comme montré ci-dessous, la liste des trains est obtenue via un format XML.
 
-```sh
+```bash
 $ curl http://localhost:9992/api/trains
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><trains><train><arrival>Paris</arrival><departure>Poitiers</departure><departureTime>1250</departureTime><id>TR123</id></train><train><arrival>Paris</arrival><departure>Poitiers</departure><departureTime>1420</departureTime><id>AX127</id></train><train><arrival>Paris</arrival><departure>Poitiers</departure><departureTime>1710</departureTime><id>PT911</id></train></trains>
 ```
@@ -207,7 +207,7 @@ Nous souhaitons désormais obtenir un retour du contenu au format JSON. Cette in
 
 * Saisir la ligne de commande suivante.
 
-```sh
+```bash
 $ curl --header "Accept:application/json" http://localhost:9992/api/trains -v
 * Connected to localhost (127.0.0.1) port 9992 (#0)
 > GET /api/trains HTTP/1.1
@@ -222,9 +222,9 @@ $ curl --header "Accept:application/json" http://localhost:9992/api/trains -v
 * Closing connection 0
 ```
 
-Comme observé sur le retour de la commande CURL, une erreur 500 est retournée. Sur la console du serveur, le message est identique à la précédente erreur pour le format XML. En d'autres termes, Jersey ne sait pas comment transformer un objet Java en JSON. Pour résoudre cette absence, il suffit d'ajouter la dépendance de la bibliothèque Jackson au fichier _pom.xml_.
+Comme observé sur le retour de la commande **cURL**, une erreur 500 est retournée. Sur la console du serveur, le message est identique à la précédente erreur pour le format XML. En d'autres termes, Jersey ne sait pas comment transformer un objet Java en JSON. Pour résoudre cette absence, il suffit d'ajouter la dépendance de la bibliothèque Jackson au fichier _pom.xml_.
 
-```sh
+```bash
 nov. 06, 2018 7:30:14 PM org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor aroundWriteTo
 SEVERE: MessageBodyWriter not found for media type=application/json, type=class java.util.ArrayList, genericType=java.util.List<fr.mickaelbaron.jaxrstutorialexercice2.Train>.
 ```
@@ -238,9 +238,9 @@ SEVERE: MessageBodyWriter not found for media type=application/json, type=class 
 </dependency>
 ```
 
-* Exécuter de nouveau la classe `TrainBookingLauncher` puis relancer la commande CURL précédente.
+* Exécuter de nouveau la classe `TrainBookingLauncher` puis relancer la commande **cURL** précédente.
 
-```sh
+```bash
 $ curl --header "Accept: application/json" http://localhost:9992/api/trains
 [{"id":"TR123","departure":"Poitiers","arrival":"Paris","departureTime":1250},{"id":"AX127","departure":"Poitiers","arrival":"Paris","departureTime":1420},{"id":"PT911","departure":"Poitiers","arrival":"Paris","departureTime":1710}]
 ```
@@ -267,14 +267,14 @@ public class Train {
 
 * Exécuter la classe `TrainBookingLauncher` puis vérifier que le nom de la clé `departure_time` a été impacté.
 
-```sh
+```bash
 $ curl --header "Accept: application/json" http://localhost:9992/api/trains
 [{"id":"TR123","departure":"Poitiers","arrival":"Paris","departure_time":1250},{"id":"AX127","departure":"Poitiers","arrival":"Paris","departure_time":1420},{"id":"PT911","departure":"Poitiers","arrival":"Paris","departure_time":1710}]
 ```
 
 * Continuer à tester le service web REST de façon à invoquer les méthodes Java `getTrain` et `searchTrainsByCriteria`. Pour cette dernière méthode, afficher la réponse complète pour s'assurer que les trois paramètres de requête sont transmis dans l'en-tête de la réponse.
 
-```sh
+```bash
 $ curl --header "Accept: application/json" http://localhost:9992/api/trains/numTrain-TR123
 {"id":"TR123","departure":"Poitiers","arrival":"Paris","departure_time":1250}
 
@@ -396,9 +396,9 @@ public class TrainResource {
 }
 ```
 
-* Exécuter la classe `BookTrainMain` et à partir de CURL invoquer chaque service lié à la réservation de billet de train qui ont été implémentés dans les quatre méthodes `createTrainBooking`, `getTrainBookings`, `getTrainBooking` et `removeTrainBooking`.
+* Exécuter la classe `BookTrainMain` et à partir de **cURL** invoquer chaque service lié à la réservation de billet de train qui ont été implémentés dans les quatre méthodes `createTrainBooking`, `getTrainBookings`, `getTrainBooking` et `removeTrainBooking`.
 
-```sh
+```bash
 # Récupérer la liste des trains.
 $ curl --header "Accept: application/json" http://localhost:9992/api/trains
 [{"id":"TR123","departure":"Poitiers","arrival":"Paris","departure_time":1250},{"id":"AX127","departure":"Poitiers","arrival":"Paris","departure_time":1420},{"id":"PT911","departure":"Poitiers","arrival":"Paris","departure_time":1710}]

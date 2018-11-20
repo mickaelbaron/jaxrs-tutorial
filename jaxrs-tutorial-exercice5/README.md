@@ -15,13 +15,13 @@ Le projet contient tout le code du service web REST.
 
 * Saisir la ligne de commande suivante depuis la racine du projet pour compiler et construire le fichier jar du projet.
 
-```sh
+```bash
 mvn clean package
 ```
 
 * Saisir la ligne de commande suivante pour démarrer le projet.
 
-```sh
+```bash
 $ java -cp "target/jaxrstutorialexercice5.jar" fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingLauncher
 Exception in thread "main" java.lang.NoClassDefFoundError: javax/ws/rs/core/UriBuilder
     at fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingLauncher.getBaseURI(TrainBookingLauncher.java:21)
@@ -56,7 +56,7 @@ Vous remarquerez que le projet ne démarre pas du fait de l'absence de certaines
 
 * Saisir les lignes de commande suivantes pour compiler, construire et démarrer le projet.
 
-```sh
+```bash
 $ mvn clean package
 ...
 $ java -cp "target/jaxrstutorialexercice5.jar:target/dependency/*" fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingLauncher
@@ -123,7 +123,7 @@ public class TrainBookingApplication extends ResourceConfig {
 
 * Saisir la ligne de commande suivante pour compiler et construire le projet vers un fichier war.
 
-```sh
+```bash
 mvn clean package -P war
 ```
 
@@ -131,13 +131,13 @@ mvn clean package -P war
 
 * Saisir la ligne de commande suivante pour télécharger une image Docker de Tomcat.
 
-```sh
+```bash
 docker pull tomcat:9-jre11-slim
 ```
 
 * Enfin, saisir la ligne de commande suivante pour créer un conteneur Docker qui permettra de démarrer une instance de Tomcat. Le fichier _jaxrstutorialexercice5.war_ contient tous les codes et dépendances de ce projet.
 
-```sh
+```bash
 docker run --rm --name helloworldrestservice-tomcat -v $(pwd)/target/jaxrstutorialexercice5.war:/usr/local/tomcat/webapps/jaxrstutorialexercice5.war -it -p 8080:8080 tomcat:9-jre11-slim
 Using CATALINA_BASE:   /usr/local/tomcat
 Using CATALINA_HOME:   /usr/local/tomcat
@@ -147,9 +147,9 @@ Using CLASSPATH:       /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin
 ...
 ```
 
-* Tester le service web REST déployé avec CURL.
+* Tester le service web REST déployé avec **cURL**.
 
-```sh
+```bash
 $ curl --header "Accept: application/xml" http://localhost:8080/jaxrstutorialexercice5/api/trains
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><trains><train><arrival>Paris</arrival><departure>Poitiers</departure><departureTime>1250</departureTime><id>TR123</id></train><train><arrival>Paris</arrival><departure>Poitiers</departure><departureTime>1420</departureTime><id>AX127</id></train><train><arrival>Paris</arrival><departure>Poitiers</departure><departureTime>1710</departureTime><id>PT911</id></train></trains>
 

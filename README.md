@@ -1,6 +1,6 @@
 # JAX-RS Tutoriel
 
-L'objectif de cette troisième leçon est d'apprendre à manipuler l'API JAX-RS pour le développement de services web REST à partir de la plateforme de développement Java.
+L'objectif de cette leçon est d'apprendre à manipuler l'API JAX-RS pour le développement de services web REST à partir de la plateforme de développement Java.
 
 Chaque exercice est fourni dans un dossier avec à l'intérieur un projet Java Maven contenant des classes et des fichiers de configuration qu'il faudra compléter au fur et à mesure des questions.
 

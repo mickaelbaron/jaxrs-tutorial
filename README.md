@@ -22,6 +22,7 @@ Avant de démarrer cette série d'exercices sur l'utilisation de l'API JAX-RS, v
 
 Retrouver les précédentes leçons :
 
+* [Tutoriel sur SOAP-UI pour inspecter et invoquer un service web étendus/SOAP via l’outil SOAP-UI](https://github.com/mickaelbaron/soapui-tutorial) ;
 * [Tutoriel sur JAX-WS pour implémenter des services web étendus/SOAP](https://github.com/mickaelbaron/jaxws-tutorial).
 
 Pour aller plus loin, vous pouvez consulter les ressources suivantes :

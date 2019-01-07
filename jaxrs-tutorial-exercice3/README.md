@@ -1,6 +1,6 @@
-# Exercice 3 (JAX-RS) : tests d'intégration de service web REST « Interrogation et réservation de billet de train »
+# Exercice 3 (JAX-RS) : tests d'intégration de service web REST « Interrogation et réservation de billets de train »
 
-Ce troisième exercice s'intéresse aux tests d'intégration de service web REST développés avec JAX-RS et Jersey. Le code du service web REST est déjà fourni et correspond à la solution complète de l'exercice 2 sur l'interrogation et la réservation de billet de train. Nous insistons dans cet exercice sur les bonnes pratiques pour développer des tests des services web REST en s'appuyant sur le style *Given-When-Then*.
+Ce troisième exercice s'intéresse aux tests d'intégration de service web REST développés avec JAX-RS et Jersey. Le code du service web REST est déjà fourni et correspond à la solution complète de l'exercice 2 sur l'interrogation et la réservation de billets de train. Nous insistons dans cet exercice sur les bonnes pratiques pour développer des tests des services web REST en s'appuyant sur le style *Given-When-Then*.
 
 Dans la suite de cet exercice le format de représentation des objets sera du JSON. Pour chaque méthode de test implémentée, vous exécuterez le test unitaire associé.
 
@@ -14,9 +14,9 @@ Dans la suite de cet exercice le format de représentation des objets sera du JS
 
 * Démarrer l'environnement de développement Eclipse.
 
-* Importer le projet Maven **jaxrs-tutorial-exercice3** (**File -> Import -> Maven -> Existing Maven Projects**), choisir le répertoire du projet puis faire **Finish**.
+* Importer le projet Maven **jaxrs-tutorial-exercice3** (**File -> Import -> Maven -> Existing Maven Projects**), choisir le répertoire du projet, puis faire **Finish**.
 
-> Le projet importé contient déjà une implémentation complète du service web REST dédié à l'interrogation et la réservation de billet de train.
+> Le projet importé contient déjà une implémentation complète du service web REST dédié à l'interrogation et la réservation de billets de train.
 
 * Éditer le fichier de description Maven *pom.xml* et ajouter les dépendances suivantes afin d'utiliser le framework de test Test-Framework de Jersey.
 
@@ -46,7 +46,7 @@ public class TrainResourceIntegrationTest extends JerseyTest {
     }
 ```
 
-* Ajouter la méthode `getTrainsTest` qui permet de tester le comportement du service dédié à la récupèration de tous les trains `/trains`.
+* Ajouter la méthode `getTrainsTest` qui permet de tester le comportement du service dédié à la récupération de tous les trains `/trains`.
 
 ```java
     @Test
@@ -113,7 +113,7 @@ public class TrainResourceIntegrationTest extends JerseyTest {
     }
 ```
 
-Nous allons maintenant implémenter les tests d'intégration concernant la ressource de *réservation de billet de train*.
+Nous allons maintenant implémenter les tests d'intégration concernant la ressource de *réservation de billets de train*.
 
 * Ouvrir la classe `TrainBookingResourceIntegrationTest` et compléter le code afin que le framework de test **Test-Framework** soit supporté.
 
@@ -162,7 +162,7 @@ public class TrainResourceIntegrationTest extends ??? {
     }
 ```
 
-* Ajouter une méthode `getTrainBookingsTest` qui permet de tester la récupération de toutes les réservation de train. Pour ce test, nous allons utiliser une fabrique de *réservation de billet de train* dans la partie `Given`.
+* Ajouter une méthode `getTrainBookingsTest` qui permet de tester la récupération de toutes les réservation de train. Pour ce test, nous allons utiliser une fabrique de *réservation de billets de train* dans la partie `Given`.
 
 ```java
     @Test
@@ -177,13 +177,13 @@ public class TrainResourceIntegrationTest extends ??? {
         // Then
         // TODO: assertions à respecter ?
         //  * le code statut doit être `200` ;
-        //  * une seule réservation de billet de train ;
-        //  * l'identifiant du train passé lors de la création 
+        //  * une seule réservation de billets de train ;
+        //  * l'identifiant du train passé lors de la création
         //    est le même que celui transmis par la réponse.
     }
 ```
 
-* Ajouter une méthode `getTrainBookingTest` qui permet de tester la récupération d'une réservation de billet de train à partir d'un identifiant de réservation.
+* Ajouter une méthode `getTrainBookingTest` qui permet de tester la récupération d'une réservation de billets de train à partir d'un identifiant de réservation.
 
 ```java
     @Test
@@ -193,14 +193,14 @@ public class TrainResourceIntegrationTest extends ??? {
 
         // When
         // TODO: invoquer le service web pour la récupération
-        // d'une réservation de billet de train à partir de currentTrainBooking.getId().
+        // d'une réservation de billets de train à partir de currentTrainBooking.getId().
 
         // Then
         Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
     }
 ```
 
-* Ajouter une méthode `getTrainBookingWithBadTrainBookingIdTest` qui permet de tester que si un identifiant de réservation de billet de train n'existe pas, une erreur de type `404` est retournée (`NOT_FOUND`).
+* Ajouter une méthode `getTrainBookingWithBadTrainBookingIdTest` qui permet de tester que si un identifiant de réservation de billets de train n'existe pas, une erreur de type `404` est retournée (`NOT_FOUND`).
 
 ```java
     @Test
@@ -225,14 +225,14 @@ public class TrainResourceIntegrationTest extends ??? {
         TrainBooking currentTrainBooking = createTrainBooking("TR123", 3);
 
         // When
-        // TODO: invoquer le service web pour la suppression d'une réservation de billet de train à partir de currentTrainBooking.getId()
+        // TODO: invoquer le service web pour la suppression d'une réservation de billets de train à partir de currentTrainBooking.getId()
 
         // Then
         // TODO: assertion doit vérifier que le code statut est `204`.
     }
 ```
 
-* Ajouter une méthode `removeTrainBookingWithBadTrainBookingIdTest` qui permet de tester que si un identifiant de réservation de billet de train n'existe pas, une erreur de type `404` est retournée (`NOT_FOUND`).
+* Ajouter une méthode `removeTrainBookingWithBadTrainBookingIdTest` qui permet de tester que si un identifiant de réservation de billets de train n'existe pas, une erreur de type `404` est retournée (`NOT_FOUND`).
 
 ```java
     @Test
@@ -242,7 +242,7 @@ public class TrainResourceIntegrationTest extends ??? {
 
         // When
         // TODO: invoquer le service web pour la suppression
-        // d'une réservation de billet de train avec un mauvais identifiant.
+        // d'une réservation de billets de train avec un mauvais identifiant.
 
         // Then
         // TODO: assertion doit vérifier que le code statut est `404`.

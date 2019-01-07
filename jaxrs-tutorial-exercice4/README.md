@@ -1,8 +1,8 @@
-# Exercice 4 (JAX-RS) : client de service web REST « Interrogation et réservation de billet de train »
+# Exercice 4 (JAX-RS) : client de service web REST « Interrogation et réservation de billets de train »
 
-Ce quatrième exercice s'intéresse à la mise en place d'un client pour l'accès au service web REST développé dans les exercices 2 et 3. Une interface graphique développée en Java/Swing permet d'invoquer les services web pour les ressources de *train* et de *réservation de billet de train*.
+Ce quatrième exercice s'intéresse à la mise en place d'un client pour l'accès au service web REST développé dans les exercices 2 et 3. Une interface graphique développée en Java/Swing permet d'invoquer les services web pour les ressources de *train* et de *réservation de billets de train*.
 
-Le projet de l'exercice 3 fournira l'implémentation du service web REST que le client que nous allons développer va invoquer. Éxécuter la classe `TrainBookingLauncher` de l'exercice 3 pour rendre disponible le service web REST.
+Le projet de l'exercice 3 fournira l'implémentation du service web REST que le client que nous allons développer va invoquer. Exécuter la classe `TrainBookingLauncher` de l'exercice 3 pour rendre disponible le service web REST.
 
 ![Swing exercice 4](./images/exercice4-swing.png "Swing exercice 4")
 
@@ -15,7 +15,7 @@ Le projet de l'exercice 3 fournira l'implémentation du service web REST que le 
 
 * Démarrer l'environnement de développement Eclipse.
 
-* Importer le projet Maven **jaxrs-tutorial-exercice4** (**File -> Import -> Maven -> Existing Maven Projects**), choisir le répertoire du projet puis faire **Finish**.
+* Importer le projet Maven **jaxrs-tutorial-exercice4** (**File -> Import -> Maven -> Existing Maven Projects**), choisir le répertoire du projet, puis faire **Finish**.
 
 > Le projet importé contient déjà une implémentation complète de l'interface graphique développée en Java/Swing. Aucune compétence en Java/Swing n'est demandée puisque l'objectif de cet exercice est de manipuler exclusivement l'API cliente JAX-RS. Si vous souhaitez proposer des améliorations à l'interface graphique, les *pull requests* sont les bienvenues.
 
@@ -28,7 +28,7 @@ Le projet de l'exercice 3 fournira l'implémentation du service web REST que le 
 </dependency>
 ```
 
-* Ouvrir la classe `TrainBookingsClientMain` et compléter le code de la méthode `initializeService` afin d'initialiser l'attribut `WebTarget target`. Pour rappel l'URL d'accès au service web REST est <http://localhost:9993/api/trains>.
+* Ouvrir la classe `TrainBookingsClientMain` et compléter le code de la méthode `initializeService` afin d'initialiser l'attribut `WebTarget target`. Pour rappel, l'URL d'accès au service web REST est <http://localhost:9993/api/trains>.
 
 ```java
     private void initializeService() {
@@ -75,7 +75,7 @@ public class Train {
     ...
 ```
 
-* Compléter la méthode `createTrainBooking` permettant de créer des réservations de billet de train. Les informations pour la création comme l'identifiant du train et le nombre de place sont renseignées en paramètre de la méthode (valeurs extraites depuis les champs de texte de l'interface graphique).
+* Compléter la méthode `createTrainBooking` permettant de créer des réservations de billet de train. Les informations pour la création comme l'identifiant du train et le nombre de places sont renseignées en paramètre de la méthode (valeurs extraites depuis les champs de texte de l'interface graphique).
 
 ```java
     private void createTrainBooking(String numTrain, int numberPlaces) {

@@ -1,4 +1,4 @@
-# Exercice 5 (JAX-RS) : déployer le service web REST « Interrogation et réservation de billet de train »
+# Exercice 5 (JAX-RS) : déployer le service web REST « Interrogation et réservation de billets de train »
 
 Ce cinquième exercice s'intéresse au déploiement du service web REST développé dans les précédents exercices. Nous montrerons le déploiement comme une application Java classique (exécuter depuis un jar) et un déploiement sur le serveur d'application Tomcat (déployer un fichier war). Nous ferons abstraction de l'environnement de développement Eclipse afin d'être le plus proche de l'environnement de production.
 
@@ -33,7 +33,7 @@ Caused by: java.lang.ClassNotFoundException: javax.ws.rs.core.UriBuilder
     ... 2 more
 ```
 
-Vous remarquerez que le projet ne démarre pas du fait de l'absence de certaines dépendances. Il est donc nécessaire de fournir les dépendances nécessaires lors de l'exécution (dans le classpath).
+Vous remarquerez que le projet ne démarre pas du fait de l'absence de certaines dépendances. Il est donc obligatoire de fournir les dépendances nécessaires lors de l'exécution (dans le classpath).
 
 * Modifier le fichier _pom.xml_ afin d'ajouter le plugin **maven-dependency-plugin** qui permettra de lister toutes les bibliothèques nécessaires.
 
@@ -70,7 +70,7 @@ Hit enter to stop it...
 
 ## Étapes à suivre pour effectuer un déploiement sur le serveur d'applications Tomcat
 
-Pour un déploiement de service web REST avec Jersey vers un serveur d'applications il est nécessaire de 1/ fournir un fichier _web.xml_ où il est précisé un objet `ResourceConfig` à prendre en compte 2/ construire le fichier war et 3/ fournir au serveur d'application le fichier war.
+Pour un déploiement de service web REST avec Jersey vers un serveur d'applications il est nécessaire de 1) fournir un fichier _web.xml_ où il est précisé un objet `ResourceConfig` à prendre en compte ; 2) construire le fichier war ; 3) fournir au serveur d'application le fichier war.
 
 * Créer une classe `TrainBookingApplication` de type `ResourceConfig`.
 
@@ -127,7 +127,7 @@ public class TrainBookingApplication extends ResourceConfig {
 mvn clean package -P war
 ```
 
-> L'option -P war permet d'utiliser le profile Maven appelé war. Depuis le fichier _pom.xml_ examiner la balise `<profiles>`. Cette astuce permet de générer un fichier jar ou un fichier war depuis un même fichier _pom.xml_.
+> L'option -P war permet d'utiliser le profil Maven appelé war. Depuis le fichier _pom.xml_ examiner la balise `<profiles>`. Cette astuce permet de générer un fichier jar ou un fichier war depuis un même fichier _pom.xml_.
 
 * Saisir la ligne de commande suivante pour télécharger une image Docker de Tomcat.
 

@@ -13,7 +13,7 @@ Le service web REST de ce premier exercice fournit un accès à la ressource «�
 
 * Démarrer l'environnement de développement Eclipse.
 
-* Importer le projet Maven **jaxrs-tutorial-exercice1** (**File -> Import -> Maven -> Existing Maven Projects**), choisir le répertoire du projet puis faire **Finish**.
+* Importer le projet Maven **jaxrs-tutorial-exercice1** (**File -> Import -> Maven -> Existing Maven Projects**), choisir le répertoire du projet, puis faire **Finish**.
 
 * Créer une classe qui représentera la ressource « Hello » (**File -> New** puis choisir **Class**). Appeler la classe `HelloResource` et la définir dans le package `fr.mickaelbaron.jaxrstutorialexercice1`.
 
@@ -93,7 +93,7 @@ public class HelloLauncher {
 
 * Ouvrir une fenêtre d'un navigateur web et tester la récupération de la ressource « Hello » (requête GET via l'URL <http://localhost:9991/api/hello>).
 
-Ce service web REST n'est pas complet puisqu'il n'est pas possible de paramétrer le message de bienvenue (utilisation de *template parameter*) ni de connaître l'auteur du message de bienvenue (utilisation d'un paramètre d'en-tête).
+Ce service web REST n'est pas complet, puisqu'il n'est pas possible de paramétrer le message de bienvenue (utilisation de *template parameter*) ni de connaître l'auteur du message de bienvenue (utilisation d'un paramètre d'en-tête).
 
 * Ajouter une nouvelle méthode Java `getHello` dans la classe `HelloENSMA` qui prend en paramètre une chaîne de caractères initialisée par un _template parameter_ (annotations `@Path` et `@PathParam`) et une autre chaîne de caractères initialisée par un paramètre d'en-tête (annotation `@HeaderParam`) dont la clé sera `name`. La valeur par défaut de l'en-tête sera fixée `votre serviteur` (annotation `@DefaultValue`).
 

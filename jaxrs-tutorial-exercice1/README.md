@@ -17,7 +17,7 @@ Le service web REST de ce premier exercice fournit un accès à la ressource «�
 
 * Créer une classe qui représentera la ressource « Hello » (**File -> New** puis choisir **Class**). Appeler la classe `HelloResource` et la définir dans le package `fr.mickaelbaron.jaxrstutorialexercice1`.
 
-* Dans la nouvelle classe créée, ajouter l'annotation `@Path("Hello")` pour préciser que la ressource sera accessible via le chemin */helloensma* et l'annotation `@Produces(MediaType.TEXT_PLAIN)` pour indiquer que le contenu retourné au client sera de type texte (`text/plain`).
+* Dans la nouvelle classe créée, ajouter l'annotation `@Path("Hello")` pour préciser que la ressource sera accessible via le chemin */hello* et l'annotation `@Produces(MediaType.TEXT_PLAIN)` pour indiquer que le contenu retourné au client sera de type texte (`text/plain`).
 
 ```java
 @Path("hello")
@@ -95,7 +95,7 @@ public class HelloLauncher {
 
 Ce service web REST n'est pas complet, puisqu'il n'est pas possible de paramétrer le message de bienvenue (utilisation de *template parameter*) ni de connaître l'auteur du message de bienvenue (utilisation d'un paramètre d'en-tête).
 
-* Ajouter une nouvelle méthode Java `getHello` dans la classe `HelloENSMA` qui prend en paramètre une chaîne de caractères initialisée par un _template parameter_ (annotations `@Path` et `@PathParam`) et une autre chaîne de caractères initialisée par un paramètre d'en-tête (annotation `@HeaderParam`) dont la clé sera `name`. La valeur par défaut de l'en-tête sera fixée `votre serviteur` (annotation `@DefaultValue`).
+* Ajouter une nouvelle méthode Java `getHello` dans la classe `HelloResource` qui prend en paramètre une chaîne de caractères initialisée par un _template parameter_ (annotations `@Path` et `@PathParam`) et une autre chaîne de caractères initialisée par un paramètre d'en-tête (annotation `@HeaderParam`) dont la clé sera `name`. La valeur par défaut de l'en-tête sera fixée `votre serviteur` (annotation `@DefaultValue`).
 
 ```java
     @GET
@@ -117,7 +117,7 @@ Bonjour ENSMA de la part de Mickael BARON
 
 Ce service web REST n'est toujours pas complet puisque nous aimerions retourner dans l'en-tête de la réponse l'auteur du message de bienvenue. Comment pourrions-nous retourner à la fois un contenu dans la réponse et une information dans l'en-tête de la réponse ? Pour cela, nous allons utiliser un objet `Response` pour le retour de méthode.
 
-* Ajouter une nouvelle méthode Java `getHelloWithHeaders` dans la classe `HelloENSMA` qui possède les mêmes paramètres que la précédente méthode. Le chemin pour invoquer cette méthode sera `withheaders/{id}` où `id` est le paramètre du message de bienvenue. Dans le corps de la méthode `getHelloWithHeaders`, compléter le code ci-dessous afin de transmettre le nom de l'auteur dans l'en-tête de la réponse.
+* Ajouter une nouvelle méthode Java `getHelloWithHeaders` dans la classe `HelloResource` qui possède les mêmes paramètres que la précédente méthode. Le chemin pour invoquer cette méthode sera `withheaders/{id}` où `id` est le paramètre du message de bienvenue. Dans le corps de la méthode `getHelloWithHeaders`, compléter le code ci-dessous afin de transmettre le nom de l'auteur dans l'en-tête de la réponse.
 
 ```java
     @GET

@@ -46,10 +46,10 @@ public class TrainResource {
 	@GET
 	@Path("/search")
 	public Response searchTrainsByCriteria(@QueryParam("departure") String departure,
-			@QueryParam("arrival") String arrival, @QueryParam("arrivalhour") String arrivalHour) {
+			@QueryParam("arrival") String arrival, @QueryParam("departure_time") String departureTime) {
 		System.out.println("TrainResource.searchTrainsByCriteria()");
 
-		return Response.ok().header("departure", departure).header("arrival", arrival).header("arrivalhour", arrivalHour)
+		return Response.ok().header("departure", departure).header("arrival", arrival).header("departure_time", departureTime)
 				.entity(TrainBookingDB.getTrains().subList(0, 2)).build();
 	}
 

@@ -278,9 +278,9 @@ $ curl --header "Accept: application/json" http://localhost:9992/api/trains
 $ curl --header "Accept: application/json" http://localhost:9992/api/trains/numTrain-TR123
 {"id":"TR123","departure":"Poitiers","arrival":"Paris","departure_time":1250}
 
-$ curl --header "Accept: application/json" http://localhost:9992/api/trains/search\?departure\=poitiers\&arrival\=paris\&arrivalhour\=1050 -v
+$ curl --header "Accept: application/json" http://localhost:9992/api/trains/search\?departure\=poitiers\&arrival\=paris\&departure_time\=1050 -v
 * Connected to localhost (127.0.0.1) port 9992 (#0)
-> GET /api/trains/search?departure=poitiers&arrival=paris&arrivalhour=1050 HTTP/1.1
+> GET /api/trains/search?departure=poitiers&arrival=paris&departure_time=1050 HTTP/1.1
 > Host: localhost:9992
 > User-Agent: curl/7.54.0
 > Accept: application/json
@@ -288,7 +288,7 @@ $ curl --header "Accept: application/json" http://localhost:9992/api/trains/sear
 < HTTP/1.1 200 OK
 < departure: poitiers
 < arrival: paris
-< arrivalhour: 1050
+< departure_time: 1050
 < Content-Type: application/json
 < Content-Length: 157
 <

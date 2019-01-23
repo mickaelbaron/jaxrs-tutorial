@@ -114,14 +114,14 @@ public class TrainResource {
     }
 
     // TODO: préciser le verbe HTTP.
-    // TODO: le chemin doit commencer par `/search`.
+    // TODO: le chemin doit commencer par `/search`.
     // Les paramètres sont tous des paramètres de requête.
-    public ??? searchTrainsByCriteria(String departure, String arrival, String arrivalHour) {
+    public ??? searchTrainsByCriteria(String departure, String arrival, String departureTime) {
         System.out.println("TrainResource.searchTrainsByCriteria()");
 
         // TODO: retourner une réponse avec :
         //   1/ les trois paramètres de requête en en-tête
-        //   2/ un sous-ensemble de la liste des trains 
+        //   2/ un sous-ensemble de la liste des trains
         //      (exemple : `TrainBookingDB.getTrains().subList(0, 2)`)
     }
 }

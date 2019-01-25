@@ -21,7 +21,7 @@ public class TrainBookingResource {
 
 		Optional<Train> findFirst = TrainBookingDB.getTrainById(trainBooking.getTrainId());
 
-		if (findFirst.isEmpty()) {
+		if (!findFirst.isPresent()) {
 			throw new NotFoundException("No matches found.");
 		}
 

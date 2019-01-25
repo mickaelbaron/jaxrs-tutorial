@@ -327,7 +327,7 @@ public class TrainBookingResource {
 
         Optional<Train> findFirst = TrainBookingDB.getTrainById(trainBooking.getTrainId());
 
-        if (findFirst.isEmpty()) {
+        if (!findFirst.isPresent()) {
              // TODO: déclencher une exception avec un statut NOT_FOUND.
         }
 

@@ -42,6 +42,7 @@ public class HelloResource {
 <dependency>
     <groupId>javax.ws.rs</groupId>
     <artifactId>javax.ws.rs-api</artifactId>
+    <version>${jaxrs.version}</version>
 </dependency>
 ```
 

@@ -380,7 +380,7 @@ public class TrainBookingResource {
 
 Cette ressource définie par la classe `TrainBookingResource` est accessible via la mise en place d'un *sub-resource locator* depuis la ressource *train*. L'avantage est de pouvoir lier la ressource *train* avec la ressource de *réservation de billets de train*.
 
-* Compléter la classe `Train` de façon à ajouter une méthode `getTrainBookingResource` qui servira de *sub-resource locator*. Assurer que les exigences suivantes soient respectées : annotée avec `@Path`, non annoté avec les annotations de méthodes HTTP (`@GET`, `@POST`, `@PUT` et `@DELETE`) et doit retourner un objet de type ressource.
+* Compléter la classe `TrainResource` de façon à ajouter une méthode `getTrainBookingResource` qui servira de *sub-resource locator*. Assurer que les exigences suivantes soient respectées : annotée avec `@Path`, non annoté avec les annotations de méthodes HTTP (`@GET`, `@POST`, `@PUT` et `@DELETE`) et doit retourner un objet de type ressource.
 
 ```java
 ...

@@ -18,7 +18,7 @@ public class HelloLauncher {
 	public static final URI BASE_URI = getBaseURI();
 
 	private static URI getBaseURI() {
-		return UriBuilder.fromUri("http://localhost/api/").port(9991).build();
+		return UriBuilder.fromUri("http://0.0.0.0/api/").port(9991).build();
 	}
 
 	public static void main(String[] args) {

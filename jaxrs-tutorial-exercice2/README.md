@@ -99,7 +99,7 @@ public class TrainResource {
     }
 
     // TODO: préciser le verbe HTTP
-    // TODO: le chemin doit commencer par `/numTrain-`  et se finir
+    // TODO: le chemin doit commencer par `/trainid-`  et se finir
     // par un template paramètre désignant l'identifiant du train.
     public Train getTrain(String trainId) {
         System.out.println("getTrain");
@@ -275,7 +275,7 @@ $ curl --header "Accept: application/json" http://localhost:9992/api/trains
 * Continuer à tester le service web REST de façon à invoquer les méthodes Java `getTrain` et `searchTrainsByCriteria`. Pour cette dernière méthode, afficher la réponse complète pour s'assurer que les trois paramètres de requête sont transmis dans l'en-tête de la réponse.
 
 ```bash
-$ curl --header "Accept: application/json" http://localhost:9992/api/trains/numTrain-TR123
+$ curl --header "Accept: application/json" http://localhost:9992/api/trains/trainid-TR123
 {"id":"TR123","departure":"Poitiers","arrival":"Paris","departure_time":1250}
 
 $ curl --header "Accept: application/json" http://localhost:9992/api/trains/search\?departure\=poitiers\&arrival\=paris\&departure_time\=1050 -v
@@ -371,8 +371,6 @@ public class TrainBookingResource {
 
         if (findFirst.isPresent()) {
             TrainBookingDB.getTrainBookings().remove(findFirst.get());
-        } else {
-            // TODO: déclencher une exception avec un statut NOT_FOUND.
         }
     }
 }
@@ -396,7 +394,7 @@ public class TrainResource {
 }
 ```
 
-* Exécuter la classe `BookTrainMain` et à partir de **cURL** invoquer chaque service lié à la réservation de billets de train qui ont été implémentés dans les quatre méthodes `createTrainBooking`, `getTrainBookings`, `getTrainBooking` et `removeTrainBooking`.
+* Exécuter la classe `TrainBookingLauncher` et à partir de **cURL** invoquer chaque service lié à la réservation de billets de train qui ont été implémentés dans les quatre méthodes `createTrainBooking`, `getTrainBookings`, `getTrainBooking` et `removeTrainBooking`.
 
 ```bash
 # Récupérer la liste des trains.
@@ -427,7 +425,8 @@ $ curl --request DELETE http://localhost:9992/api/trains/bookings/1541683057395 
 <
 * Connection #0 to host localhost left intact
 
-# Supprimer une réservation de billets de train par un identifiant (échouée).
+# Comme la méthode DELETE est idempotent possibilité de rappeler plusieurs fois
+# la suppression de billets de train pour un même identifiant (réussie).
 $ curl --request DELETE http://localhost:9992/api/trains/bookings/1541683057395 -v
 * Connected to localhost (127.0.0.1) port 9992 (#0)
 > DELETE /api/trains/bookings/1541685562466 HTTP/1.1
@@ -435,8 +434,7 @@ $ curl --request DELETE http://localhost:9992/api/trains/bookings/1541683057395 
 > User-Agent: curl/7.54.0
 > Accept: */*
 >
-< HTTP/1.1 404 Not Found
-< Content-Length: 0
+< HTTP/1.1 204 No Content
 <
 * Connection #0 to host localhost left intact
 ```

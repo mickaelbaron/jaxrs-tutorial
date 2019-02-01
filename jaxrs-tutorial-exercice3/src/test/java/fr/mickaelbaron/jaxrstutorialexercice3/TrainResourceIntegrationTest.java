@@ -26,7 +26,7 @@ public class TrainResourceIntegrationTest {
 
 		// When
 		// TODO: invoquer le service dédié à la récupération d'un train
-		// par son identifiant fonctionnel (trainId = "TR123").
+		// par son identifiant fonctionnel (trainid = "TR123").
 
 		// Then
 		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
@@ -45,14 +45,14 @@ public class TrainResourceIntegrationTest {
 
 		// When
 		Response response = target("/trains").path("search").queryParam("departure", departure)
-				.queryParam("arrival", arrival).queryParam("departureTime", departureTime)
+				.queryParam("arrival", arrival).queryParam("departure_time", departureTime)
 				.request(MediaType.APPLICATION_JSON_TYPE).get();
 
         // Then
         // TODO: assertions à respecter ?
         //  * le code de statut doit être `200` ;
         //  * la réponse doit contenir trois paramètres d'en-tête qui correspondent 
-        //    aux paramètres de la requête initiale (`departure`, `arrival` et `departureTime`) ;
+        //    aux paramètres de la requête initiale (`departure`, `arrival` et `departure_time`) ;
         //  * le contenu doit être une liste de trains d'une taille de deux éléments.
 	}
 }

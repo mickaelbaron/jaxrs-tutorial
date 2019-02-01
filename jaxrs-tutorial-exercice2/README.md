@@ -396,7 +396,7 @@ public class TrainResource {
 }
 ```
 
-* Exécuter la classe `BookTrainMain` et à partir de **cURL** invoquer chaque service lié à la réservation de billets de train qui ont été implémentés dans les quatre méthodes `createTrainBooking`, `getTrainBookings`, `getTrainBooking` et `removeTrainBooking`.
+* Exécuter la classe `TrainBookingLauncher` et à partir de **cURL** invoquer chaque service lié à la réservation de billets de train qui ont été implémentés dans les quatre méthodes `createTrainBooking`, `getTrainBookings`, `getTrainBooking` et `removeTrainBooking`.
 
 ```bash
 # Récupérer la liste des trains.

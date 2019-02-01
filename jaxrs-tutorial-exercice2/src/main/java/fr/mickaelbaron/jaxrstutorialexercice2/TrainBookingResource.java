@@ -65,8 +65,6 @@ public class TrainBookingResource {
 
 		if (findFirst.isPresent()) {
 			TrainBookingDB.getTrainBookings().remove(findFirst.get());
-		} else {
-			throw new NotFoundException("No matches found.");
 		}
 	}
 }

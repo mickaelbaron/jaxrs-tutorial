@@ -132,6 +132,6 @@ public class TrainBookingResourceIntegrationTest extends JerseyTest {
 		Response response = target("/trains/bookings").path(trainBookingId).request(MediaType.APPLICATION_JSON_TYPE).delete();
 		
 		// Then
-		Assert.assertEquals("Http Response should be 404: ", Status.NOT_FOUND.getStatusCode(), response.getStatus());
+		Assert.assertEquals("Http Response should be 204: ", Status.NO_CONTENT.getStatusCode(), response.getStatus());
 	}
 }

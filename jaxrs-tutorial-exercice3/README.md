@@ -75,7 +75,7 @@ public class TrainResourceIntegrationTest extends JerseyTest {
 
         // When
         // TODO: invoquer le service dédié à la récupération d'un train
-        // par son identifiant fonctionnel (trainId = "TR123").
+        // par son identifiant fonctionnel (trainid = "TR123").
 
         // Then
         Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
@@ -88,7 +88,7 @@ public class TrainResourceIntegrationTest extends JerseyTest {
 
 * Compléter la méthode `searchTrainsByCriteriaTest` au niveau de la partie *Then* afin d'ajouter des assertions qui satisfont les contraintes suivantes :
   * le code de statut doit être `200` ;
-  * la réponse doit contenir trois paramètres d'en-tête qui correspondent aux paramètres de la requête initiale (`departure`, `arrival` et `departureTime`) ;
+  * la réponse doit contenir trois paramètres d'en-tête qui correspondent aux paramètres de la requête initiale (`departure`, `arrival` et `departure_time`) ;
   * le contenu doit être une liste de trains d'une taille de deux éléments.
 
 ```java
@@ -101,14 +101,14 @@ public class TrainResourceIntegrationTest extends JerseyTest {
 
         // When
         Response response = target("/trains").path("search").queryParam("departure", departure)
-                .queryParam("arrival", arrival).queryParam("departureTime", departureTime)
+                .queryParam("arrival", arrival).queryParam("departure_time", departureTime)
                 .request(MediaType.APPLICATION_JSON_TYPE).get();
 
         // Then
         // TODO: assertions à respecter ?
         //  * le code de statut doit être `200` ;
-        //  * la réponse doit contenir trois paramètres d'en-tête qui correspondent 
-        //    aux paramètres de la requête initiale (`departure`, `arrival` et `departureTime`) ;
+        //  * la réponse doit contenir trois paramètres d'en-tête qui correspondent
+        //    aux paramètres de la requête initiale (`departure`, `arrival` et `departure_time`) ;
         //  * le contenu doit être une liste de trains d'une taille de deux éléments.
     }
 ```
@@ -232,7 +232,7 @@ public class TrainResourceIntegrationTest extends ??? {
     }
 ```
 
-* Ajouter une méthode `removeTrainBookingWithBadTrainBookingIdTest` qui permet de tester que si un identifiant de réservation de billets de train n'existe pas, une erreur de type `404` est retournée (`NOT_FOUND`).
+* Ajouter une méthode `removeTrainBookingWithBadTrainBookingIdTest` qui permet de tester que si un identifiant de réservation de billets de train n'existe pas, le code statut de la réponse doit être `204` puisque le méthode `DELETE` est idempotente.
 
 ```java
     @Test
@@ -245,6 +245,6 @@ public class TrainResourceIntegrationTest extends ??? {
         // d'une réservation de billets de train avec un mauvais identifiant.
 
         // Then
-        // TODO: assertion doit vérifier que le code statut est `404`.
+        // TODO: assertion doit vérifier que le code statut est `204`.
     }
 ```

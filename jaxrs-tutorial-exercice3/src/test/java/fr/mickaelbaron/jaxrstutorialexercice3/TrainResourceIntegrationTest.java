@@ -49,7 +49,7 @@ public class TrainResourceIntegrationTest extends JerseyTest {
 		String trainId = "TR123";
 
 		// When
-		Response response = target("/trains").path("numTrain-" + trainId).request(MediaType.APPLICATION_JSON_TYPE)
+		Response response = target("/trains").path("trainid-" + trainId).request(MediaType.APPLICATION_JSON_TYPE)
 				.get();
 
 		// Then
@@ -69,14 +69,14 @@ public class TrainResourceIntegrationTest extends JerseyTest {
 
 		// When
 		Response response = target("/trains").path("search").queryParam("departure", departure)
-				.queryParam("arrival", arrival).queryParam("departureTime", departureTime)
+				.queryParam("arrival", arrival).queryParam("departure_time", departureTime)
 				.request(MediaType.APPLICATION_JSON_TYPE).get();
 
 		// Then
 		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
 		Assert.assertEquals(departure, response.getHeaderString("departure"));
 		Assert.assertEquals(arrival, response.getHeaderString("arrival"));
-		Assert.assertEquals(departureTime, response.getHeaderString("departureTime"));
+		Assert.assertEquals(departureTime, response.getHeaderString("departure_time"));
 		List<Train> readEntities = response.readEntity(new GenericType<List<Train>>() {});
 		Assert.assertNotNull(readEntities);
 		Assert.assertEquals(2, readEntities.size());

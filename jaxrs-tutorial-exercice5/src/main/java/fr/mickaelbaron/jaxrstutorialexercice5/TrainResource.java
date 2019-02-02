@@ -30,7 +30,7 @@ public class TrainResource {
 	}
 
 	@GET
-	@Path("numTrain-{id}")
+	@Path("trainid-{id}")
 	public Train getTrain(@PathParam("id") String trainId) {
 		System.out.println("getTrain");
 

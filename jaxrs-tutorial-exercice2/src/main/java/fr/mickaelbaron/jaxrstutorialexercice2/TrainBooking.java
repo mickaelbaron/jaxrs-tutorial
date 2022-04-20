@@ -1,15 +1,12 @@
 package fr.mickaelbaron.jaxrstutorialexercice2;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * @author Mickael BARON (baron.mickael@gmail.com)
  */
-@XmlRootElement(name = "trainbooking")
 public class TrainBooking {
 
 	private String id;
-
+	
 	private String trainId;
 
 	private int numberPlaces;

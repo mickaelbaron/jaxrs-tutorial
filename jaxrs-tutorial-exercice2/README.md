@@ -181,11 +181,20 @@ $ curl http://localhost:9992/api/trains -v
 Comme observé sur le retour de la commande **cURL**, une erreur 500 (*Internal Server Error*) est retournée. Sur la console du serveur, le message suivant a dû être généré.
 
 ```bash
-nov. 06, 2018 6:29:44 PM org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor aroundWriteTo
+avr. 20, 2022 11:25:52 PM org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor aroundWriteTo
 SEVERE: MessageBodyWriter not found for media type=application/xml, type=class java.util.ArrayList, genericType=java.util.List<fr.mickaelbaron.jaxrstutorialexercice2.Train>.
 ```
 
-Cette erreur indique que la classe `Train` ne contient pas les informations nécessaires pour transformer un objet en XML (XML est le format choisi dans l'ordre d'apparition de l'annotation `@Produces`). Pour une sérialisation Java <=> XML, chaque classe doit être au moins annotée à la racine pour activer le *mapping* entre l'XML Schema et les attributs de la classe.
+Cette erreur indique que Jersey ne sait pas comment sérialiser un objet Java en XML. Pour résoudre ce problème, deux modifications doivent être apportées. La première concerne l'absence d'une dépendance au fichier _pom.xml_ qui va permettre de gérer la sérialisation.
+
+```xml
+<dependency>
+    <groupId>org.glassfish.jersey.media</groupId>
+	<artifactId>jersey-media-jaxb</artifactId>
+</dependency>
+```
+
+La seconde modification nécessite que chaque classe qui va être sérailisée doit être au moins annotée pour activer le *mapping* entre l'XML Schema et les attributs de la classe.
 
 * Éditer la classe `Train` et ajouter l'annotation suivante
 
@@ -222,12 +231,14 @@ $ curl --header "Accept:application/json" http://localhost:9992/api/trains -v
 * Closing connection 0
 ```
 
-Comme observé sur le retour de la commande **cURL**, une erreur 500 est retournée. Sur la console du serveur, le message est identique à la précédente erreur pour le format XML. En d'autres termes, Jersey ne sait pas comment transformer un objet Java en JSON. Pour résoudre cette absence, il suffit d'ajouter la dépendance de la bibliothèque Jackson au fichier _pom.xml_.
+Comme observé sur le retour de la commande **cURL**, une erreur 500 est retournée. Sur la console du serveur, le message est identique à la précédente erreur pour le format XML. En d'autres termes, Jersey ne sait pas comment transformer un objet Java en JSON. 
 
 ```bash
-nov. 06, 2018 7:30:14 PM org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor aroundWriteTo
+avr. 20, 2022 11:26:58 PM org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor aroundWriteTo
 SEVERE: MessageBodyWriter not found for media type=application/json, type=class java.util.ArrayList, genericType=java.util.List<fr.mickaelbaron.jaxrstutorialexercice2.Train>.
 ```
+
+Pour résoudre cette absence, il suffit d'ajouter une nouvelle dépendance au fichier _pom.xml_ qui permettra de gérer la sérialisation vers le format JSON.
 
 * Éditer le fichier _pom.xml_ et ajouter la dépendance suivante.
 

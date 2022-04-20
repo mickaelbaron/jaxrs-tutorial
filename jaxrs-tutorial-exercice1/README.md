@@ -36,18 +36,6 @@ public class HelloResource {
     }
 ```
 
-* Afin de résoudre les problèmes de dépendances vers la bibliothèque JAX-RS, compléter le fichier de description Maven *pom.xml* en ajoutant la dépendance suivante (balise `<dependencies>`).
-
-```xml
-<dependency>
-    <groupId>javax.ws.rs</groupId>
-    <artifactId>javax.ws.rs-api</artifactId>
-    <version>${jaxrs.version}</version>
-</dependency>
-```
-
-Cette dépendance (API de JAX-RS) ne sert qu'à résoudre les problèmes de visibilité des annotations. Nous aurons besoin de dépendances supplémentaires (implémentation de JAX-RS) quand nous souhaiterons déployer notre service web REST.
-
 * Compléter la classe `HelloLauncher` dans le package `fr.mickaelbaron.jaxrstutorialexercice1`. Cette classe sera utilisée pour publier localement notre service web REST.
 
 ```java
@@ -160,7 +148,7 @@ Bonjour ENSMA de la part de (voir l'en-tête).
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <application xmlns="http://wadl.dev.java.net/2009/02">
-    <doc xmlns:jersey="http://jersey.java.net/" jersey:generatedBy="Jersey: 2.27 2018-04-10 07:34:57"/>
+    <doc xmlns:jersey="http://jersey.java.net/" jersey:generatedBy="Jersey: 3.0.2 2021-04-23 08:09:46"/>
     <doc xmlns:jersey="http://jersey.java.net/" jersey:hint="This is simplified WADL with user and core resources only. To get full WADL with extended resources use the query parameter detail. Link: http://localhost:9991/api/application.wadl?detail=true"/>
     <grammars/>
     <resources base="http://localhost:9991/api/">
@@ -170,9 +158,9 @@ Bonjour ENSMA de la part de (voir l'en-tête).
                     <representation mediaType="text/plain"/>
                 </response>
             </method>
-            <resource path="{id}">
+            <resource path="withheaders/{id}">
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="template" type="xs:string"/>
-                <method id="getHello" name="GET">
+                <method id="getHelloWithHeaders" name="GET">
                     <request>
                         <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="name" style="header" type="xs:string" default="votre serviteur"/>
                     </request>
@@ -181,9 +169,9 @@ Bonjour ENSMA de la part de (voir l'en-tête).
                     </response>
                 </method>
             </resource>
-            <resource path="withheaders/{id}">
+            <resource path="{id}">
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="template" type="xs:string"/>
-                <method id="getHelloWithHeaders" name="GET">
+                <method id="getHello" name="GET">
                     <request>
                         <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="name" style="header" type="xs:string" default="votre serviteur"/>
                     </request>

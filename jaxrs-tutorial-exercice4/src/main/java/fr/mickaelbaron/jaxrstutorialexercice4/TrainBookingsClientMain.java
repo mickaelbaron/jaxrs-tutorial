@@ -10,8 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response.Status;
+
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.Response.Status;
 
 /**
  * @author Mickael BARON (baron.mickael@gmail.com)

@@ -1,19 +1,9 @@
 package fr.mickaelbaron.jaxrstutorialexercice3;
 
-import java.util.List;
-import java.util.logging.Level;
-
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
-import org.glassfish.jersey.logging.LoggingFeature;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.junit.Assert;
-import org.junit.Test;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 /**
  * @author Mickael BARON (baron.mickael@gmail.com)

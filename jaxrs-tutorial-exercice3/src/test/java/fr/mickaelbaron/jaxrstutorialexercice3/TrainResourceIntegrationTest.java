@@ -3,17 +3,17 @@ package fr.mickaelbaron.jaxrstutorialexercice3;
 import java.util.List;
 import java.util.logging.Level;
 
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Assert;
 import org.junit.Test;
+
+import jakarta.ws.rs.core.Application;
+import jakarta.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 /**
  * @author Mickael BARON (baron.mickael@gmail.com)
@@ -49,8 +49,7 @@ public class TrainResourceIntegrationTest extends JerseyTest {
 		String trainId = "TR123";
 
 		// When
-		Response response = target("/trains").path("trainid-" + trainId).request(MediaType.APPLICATION_JSON_TYPE)
-				.get();
+		Response response = target("/trains").path("trainid-" + trainId).request(MediaType.APPLICATION_JSON_TYPE).get();
 
 		// Then
 		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
@@ -77,7 +76,8 @@ public class TrainResourceIntegrationTest extends JerseyTest {
 		Assert.assertEquals(departure, response.getHeaderString("departure"));
 		Assert.assertEquals(arrival, response.getHeaderString("arrival"));
 		Assert.assertEquals(departureTime, response.getHeaderString("departure_time"));
-		List<Train> readEntities = response.readEntity(new GenericType<List<Train>>() {});
+		List<Train> readEntities = response.readEntity(new GenericType<List<Train>>() {
+		});
 		Assert.assertNotNull(readEntities);
 		Assert.assertEquals(2, readEntities.size());
 	}

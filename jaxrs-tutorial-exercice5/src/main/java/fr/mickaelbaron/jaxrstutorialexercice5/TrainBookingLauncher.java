@@ -3,12 +3,12 @@ package fr.mickaelbaron.jaxrstutorialexercice5;
 import java.net.URI;
 import java.util.logging.Level;
 
-import javax.ws.rs.core.UriBuilder;
-
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
+
+import jakarta.ws.rs.core.UriBuilder;
 
 /**
  * @author Mickael BARON (baron.mickael@gmail.com)
@@ -24,7 +24,8 @@ public class TrainBookingLauncher {
 	public static void main(String[] args) {
 		ResourceConfig rc = new ResourceConfig();
 		rc.registerClasses(TrainResource.class);
-		rc.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, Level.WARNING.getName());
+		rc.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, Level.INFO.getName());
+		rc.property("org.glassfish.jersey.logging.LoggingInterceptor", Level.WARNING.getName());
 		
 		try {
 			HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);

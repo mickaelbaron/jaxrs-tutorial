@@ -16,21 +16,21 @@ Le projet contient tout le code du service web REST.
 * Saisir la ligne de commande suivante depuis la racine du projet pour compiler et construire le fichier jar du projet.
 
 ```bash
-mvn clean package
+$ mvn clean package
 ```
 
 * Saisir la ligne de commande suivante pour démarrer le projet.
 
 ```bash
 $ java -cp "target/jaxrstutorialexercice5.jar" fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingLauncher
-Exception in thread "main" java.lang.NoClassDefFoundError: javax/ws/rs/core/UriBuilder
-    at fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingLauncher.getBaseURI(TrainBookingLauncher.java:21)
-    at fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingLauncher.<clinit>(TrainBookingLauncher.java:18)
-Caused by: java.lang.ClassNotFoundException: javax.ws.rs.core.UriBuilder
-    at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:582)
-    at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
-    at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
-    ... 2 more
+Exception in thread "main" java.lang.NoClassDefFoundError: jakarta/ws/rs/core/UriBuilder
+	at fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingLauncher.getBaseURI(TrainBookingLauncher.java:21)
+	at fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingLauncher.<clinit>(TrainBookingLauncher.java:18)
+Caused by: java.lang.ClassNotFoundException: jakarta.ws.rs.core.UriBuilder
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:583)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
+	... 2 more
 ```
 
 Vous remarquerez que le projet ne démarre pas du fait de l'absence de certaines dépendances. Il est donc obligatoire de fournir les dépendances nécessaires lors de l'exécution (dans le classpath).
@@ -60,9 +60,11 @@ Vous remarquerez que le projet ne démarre pas du fait de l'absence de certaines
 $ mvn clean package
 ...
 $ java -cp "target/jaxrstutorialexercice5.jar:target/dependency/*" fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingLauncher
-nov. 10, 2018 4:57:35 PM org.glassfish.grizzly.http.server.NetworkListener start
+avr. 21, 2022 11:10:28 PM org.glassfish.jersey.server.wadl.WadlFeature configure
+WARNING: JAXBContext implementation could not be found. WADL feature is disabled.
+avr. 21, 2022 11:10:28 PM org.glassfish.grizzly.http.server.NetworkListener start
 INFO: Started listener bound to [localhost:9993]
-nov. 10, 2018 4:57:35 PM org.glassfish.grizzly.http.server.HttpServer start
+avr. 21, 2022 11:10:28 PM org.glassfish.grizzly.http.server.HttpServer start
 INFO: [HttpServer] Started.
 Jersey app started with WADL available at http://localhost:9993/api/
 Hit enter to stop it...
@@ -70,21 +72,7 @@ Hit enter to stop it...
 
 ## Étapes à suivre pour effectuer un déploiement sur le serveur d'applications Tomcat
 
-Pour un déploiement de service web REST avec Jersey vers un serveur d'applications il est nécessaire de 1) fournir un fichier _web.xml_ où il est précisé un objet `ResourceConfig` à prendre en compte ; 2) construire le fichier war ; 3) fournir au serveur d'application le fichier war.
-
-* Créer une classe `TrainBookingApplication` de type `ResourceConfig`.
-
-```java
-package fr.mickaelbaron.jaxrstutorialexercice5;
-
-public class TrainBookingApplication extends ResourceConfig {
-
-    public TrainBookingApplication() {
-        this.registerClasses(TrainBookingResource.class, TrainResource.class);
-        this.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, Level.WARNING.getName());
-    }
-}
-```
+Pour un déploiement de service web REST avec Jersey vers un serveur d'applications il est nécessaire de 1) fournir un fichier _web.xml_ où il est précisé le package des ressouces ; 2) construire le fichier war ; 3) fournir au serveur d'application le fichier war.
 
 * Éditer le fichier _src/main/configuration/web.xml_ et ajouter la déclaration de la classe `TrainBookingApplication`.
 
@@ -100,8 +88,8 @@ public class TrainBookingApplication extends ResourceConfig {
         <servlet-name>jersey-servlet</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
-            <param-name>javax.ws.rs.Application</param-name>
-            <param-value>fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingApplication</param-value>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>fr.mickaelbaron.jaxrstutorialexercice5</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -112,37 +100,37 @@ public class TrainBookingApplication extends ResourceConfig {
 </web-app>
 ```
 
-* Éditer le fichier _pom.xml_ et à la ligne 102, préciser le chemin et le nom du fichier _web.xml_ qui sera utilisé comme descripteur pour l'application web Java.
+* Éditer le fichier _pom.xml_ et à la ligne 100, préciser le chemin et le nom du fichier _web.xml_ qui sera utilisé comme descripteur pour l'application web Java.
 
 ```xml
 <properties>
     <project.packaging>war</project.packaging>
-    <maven.war.webxml>TODO</maven.war.webxml>
+    <maven.war.webxml>src\main\configuration\web.xml</maven.war.webxml>
 </properties>
 ```
 
 * Saisir la ligne de commande suivante pour compiler et construire le projet vers un fichier war.
 
 ```bash
-mvn clean package -P war
+$ mvn clean package -P war
 ```
 
-> L'option -P war permet d'utiliser le profil Maven appelé war. Depuis le fichier _pom.xml_ examiner la balise `<profiles>`. Cette astuce permet de générer un fichier jar ou un fichier war depuis un même fichier _pom.xml_.
+> L'option -P war permet d'utiliser le profil Maven appelé _war_. Depuis le fichier _pom.xml_ examiner la balise `<profiles>`. Cette astuce permet de générer un fichier jar ou un fichier war depuis un même fichier _pom.xml_.
 
 * Saisir la ligne de commande suivante pour télécharger une image Docker de Tomcat.
 
 ```bash
-docker pull tomcat:9-jre11-slim
+$ docker pull tomcat:jre11-openjdk-slim
 ```
 
 * Enfin, saisir la ligne de commande suivante pour créer un conteneur Docker qui permettra de démarrer une instance de Tomcat. Le fichier _jaxrstutorialexercice5.war_ contient tous les codes et dépendances de ce projet.
 
 ```bash
-docker run --rm --name helloworldrestservice-tomcat -v $(pwd)/target/jaxrstutorialexercice5.war:/usr/local/tomcat/webapps/jaxrstutorialexercice5.war -it -p 8080:8080 tomcat:9-jre11-slim
+$ docker run --rm --name helloworldrestservice-tomcat -v $(pwd)/target/jaxrstutorialexercice5.war:/usr/local/tomcat/webapps/jaxrstutorialexercice5.war -it -p 8080:8080 tomcat:jre11-openjdk-slim
 Using CATALINA_BASE:   /usr/local/tomcat
 Using CATALINA_HOME:   /usr/local/tomcat
 Using CATALINA_TMPDIR: /usr/local/tomcat/temp
-Using JRE_HOME:        /docker-java-home
+Using JRE_HOME:        /usr/local/openjdk-11
 Using CLASSPATH:       /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar
 ...
 ```

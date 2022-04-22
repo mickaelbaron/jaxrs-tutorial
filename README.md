@@ -1,4 +1,4 @@
-# JAX-RS Tutoriel
+# Tutoriel JAX-RS
 
 L'objectif de cette leçon est d'apprendre à manipuler l'API JAX-RS pour le développement de services web REST à partir de la plateforme de développement Java.
 

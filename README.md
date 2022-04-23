@@ -6,13 +6,13 @@ Chaque exercice est fourni dans un dossier avec à l'intérieur un projet Java M
 
 **Buts pédagogiques** : transformation d'une classe Java en service web REST, manipulation des annotations JAX-RS, tests d'intégration, client Java, implémentation Jersey, invocation des services REST via **cURL**, compilation avec Maven, déploiement du service web REST avec un serveur d'application lui-même déployé dans un conteneur Docker, déploiement du service web REST depuis une classe principale Java.
 
-> Ce dépôt est utilisé dans le cadre d'un cours sur les architectures orientées services que je dispense à l'[ISAE-ENSMA](https://www.ensma.fr) et à l'[Université de Poitiers](https://www.univ-poitiers.fr/) en français. Tous les supports de cours et tutoriaux sont disponibles sur ma page Developpez.com : [https://mbaron.developpez.com](https://mbaron.developpez.com/#page_soa).
+> Ce dépôt est utilisé dans le cadre d'un cours sur les architectures orientées services que je dispense à l'[ISAE-ENSMA](https://www.ensma.fr) et à l'[Université de Poitiers](http://www.univ-poitiers.fr/) en français. Tous les supports de cours et tutoriaux sont disponibles sur mon blog personnel : [https://mickael-baron.fr/soa/](https://mickael-baron.fr/soa/).
 
 ## Prérequis logiciels
 
 Avant de démarrer cette série d'exercices sur l'utilisation de l'API JAX-RS, veuillez préparer votre environnement de développement en installant les outils suivants :
 
-* [Java via OpenJDK](https://jdk.java.net/ "Java 8 à 11") ;
+* [Java via OpenJDK](https://jdk.java.net/ "Java") ;
 * [Maven](https://maven.apache.org/ "Maven") ;
 * [Eclipse](https://www.eclipse.org/ "Eclipse") ;
 * [cURL](https://curl.haxx.se "cURL") ;

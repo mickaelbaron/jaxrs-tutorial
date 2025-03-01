@@ -13,11 +13,11 @@ Nous insisterons sur la mise en place du service web REST et non sur le code mé
 
 ## Étapes à suivre
 
-* Démarrer l'environnement de développement Eclipse.
+* Démarrer l'éditeur [VSCode](https://code.visualstudio.com/ "Visual Studio Code").
 
-* Importer le projet Maven **jaxrs-tutorial-exercice2** (**File -> Import -> Maven -> Existing Maven Projects**), choisir le répertoire du projet puis faire **Finish**.
+* Ouvrir le dossier du projet Maven **jaxrs-tutorial-exercice2**.
 
-> Le projet importé contient déjà des classes. À ce stade, de nombreuses erreurs de compilation sont présentes, dues à l'absence de certaines classes Java. Pas d'inquiétude, nous allons les ajouter progressivement.
+> Le projet importé contient déjà des classes. À ce stade, de nombreuses erreurs de compilation sont présentes, dues à l'absence de certaines classes Java. Pas d'inquiétude, elles seront ajoutées progressivement.
 
 * Créer une classe `Train` (dans le package `fr.mickaelbaron.jaxrstutorialexercice2`) qui modélise le concept de **train** et qui contient un attribut `String id` (identifiant fonctionnel d'un train), un attribut `String departure` (la ville de départ du train), un attribut `String arrival` (la ville d'arrivée du train) et un attribut `int departureTime` (heure de départ). Ajouter des modificateurs et des accesseurs sur tous les attributs. Ci-dessous un résultat du code que vous devez obtenir.
 
@@ -164,7 +164,12 @@ public class TrainBookingLauncher {
 * Exécuter la classe `TrainBookingLauncher`, puis à partir de **cURL** invoquer le service web permettant de récupérer la liste de tous les trains.
 
 ```bash
-$ curl http://localhost:9992/api/trains -v
+curl http://localhost:9992/api/trains -v
+```
+
+La sortie console attendue :
+
+```bash
 * Connected to localhost (127.0.0.1) port 9992 (#0)
 > GET /api/trains HTTP/1.1
 > Host: localhost:9992
@@ -190,7 +195,7 @@ Cette erreur indique que Jersey ne sait pas comment sérialiser un objet Java en
 ```xml
 <dependency>
     <groupId>org.glassfish.jersey.media</groupId>
-	<artifactId>jersey-media-jaxb</artifactId>
+    <artifactId>jersey-media-jaxb</artifactId>
 </dependency>
 ```
 
@@ -208,7 +213,12 @@ public class Train {
 * Exécuter de nouveau la classe `TrainBookingLauncher`, puis à partir de **cURL** invoquer le service web permettant de récupérer la liste de tous les trains. Comme montré ci-dessous, la liste des trains est obtenue via un format XML.
 
 ```bash
-$ curl http://localhost:9992/api/trains
+curl http://localhost:9992/api/trains
+```
+
+La sortie console attendue :
+
+```bash
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><trains><train><arrival>Paris</arrival><departure>Poitiers</departure><departureTime>1250</departureTime><id>TR123</id></train><train><arrival>Paris</arrival><departure>Poitiers</departure><departureTime>1420</departureTime><id>AX127</id></train><train><arrival>Paris</arrival><departure>Poitiers</departure><departureTime>1710</departureTime><id>PT911</id></train></trains>
 ```
 
@@ -217,7 +227,12 @@ Nous souhaitons désormais obtenir un retour du contenu au format JSON. Cette in
 * Saisir la ligne de commande suivante.
 
 ```bash
-$ curl --header "Accept:application/json" http://localhost:9992/api/trains -v
+curl --header "Accept:application/json" http://localhost:9992/api/trains -v
+```
+
+La sortie console attendue :
+
+```bash
 * Connected to localhost (127.0.0.1) port 9992 (#0)
 > GET /api/trains HTTP/1.1
 > Host: localhost:9992
@@ -252,7 +267,12 @@ Pour résoudre cette absence, il suffit d'ajouter une nouvelle dépendance au fi
 * Exécuter de nouveau la classe `TrainBookingLauncher`, puis relancer la commande **cURL** précédente.
 
 ```bash
-$ curl --header "Accept: application/json" http://localhost:9992/api/trains
+curl --header "Accept: application/json" http://localhost:9992/api/trains
+```
+
+La sortie console attendue :
+
+```bash
 [{"id":"TR123","departure":"Poitiers","arrival":"Paris","departureTime":1250},{"id":"AX127","departure":"Poitiers","arrival":"Paris","departureTime":1420},{"id":"PT911","departure":"Poitiers","arrival":"Paris","departureTime":1710}]
 ```
 
@@ -279,17 +299,34 @@ public class Train {
 * Exécuter la classe `TrainBookingLauncher`, puis vérifier que le nom de la clé `departure_time` a été impacté.
 
 ```bash
-$ curl --header "Accept: application/json" http://localhost:9992/api/trains
+curl --header "Accept: application/json" http://localhost:9992/api/trains
+```
+
+La sortie console attendue :
+
+```bash
 [{"id":"TR123","departure":"Poitiers","arrival":"Paris","departure_time":1250},{"id":"AX127","departure":"Poitiers","arrival":"Paris","departure_time":1420},{"id":"PT911","departure":"Poitiers","arrival":"Paris","departure_time":1710}]
 ```
 
 * Continuer à tester le service web REST de façon à invoquer les méthodes Java `getTrain` et `searchTrainsByCriteria`. Pour cette dernière méthode, afficher la réponse complète pour s'assurer que les trois paramètres de requête sont transmis dans l'en-tête de la réponse.
 
 ```bash
-$ curl --header "Accept: application/json" http://localhost:9992/api/trains/trainid-TR123
-{"id":"TR123","departure":"Poitiers","arrival":"Paris","departure_time":1250}
+curl --header "Accept: application/json" http://localhost:9992/api/trains/trainid-TR123
+``` 
 
-$ curl --header "Accept: application/json" http://localhost:9992/api/trains/search\?departure\=poitiers\&arrival\=paris\&departure_time\=1050 -v
+La sortie console attendue :
+
+```bash
+{"id":"TR123","departure":"Poitiers","arrival":"Paris","departure_time":1250}
+```
+
+```bash
+curl --header "Accept: application/json" http://localhost:9992/api/trains/search\?departure\=poitiers\&arrival\=paris\&departure_time\=1050 -v
+```
+
+La sortie console attendue :
+
+```bash
 * Connected to localhost (127.0.0.1) port 9992 (#0)
 > GET /api/trains/search?departure=poitiers&arrival=paris&departure_time=1050 HTTP/1.1
 > Host: localhost:9992
@@ -407,25 +444,63 @@ public class TrainResource {
 
 * Exécuter la classe `TrainBookingLauncher` et à partir de **cURL** invoquer chaque service lié à la réservation de billets de train qui ont été implémentés dans les quatre méthodes `createTrainBooking`, `getTrainBookings`, `getTrainBooking` et `removeTrainBooking`.
 
+* Récupérer la liste des trains.
+
 ```bash
-# Récupérer la liste des trains.
-$ curl --header "Accept: application/json" http://localhost:9992/api/trains
+curl --header "Accept: application/json" http://localhost:9992/api/trains
+```
+
+La sortie console attendue :
+
+```bash
 [{"id":"TR123","departure":"Poitiers","arrival":"Paris","departure_time":1250},{"id":"AX127","departure":"Poitiers","arrival":"Paris","departure_time":1420},{"id":"PT911","departure":"Poitiers","arrival":"Paris","departure_time":1710}]
+```
 
-# Créer une réservation de billets de train.
-$ curl --header "Accept: application/json" --header "Content-Type: application/json" --request POST --data '{"current_train":"TR123","number_places":2}' http://localhost:9992/api/trains/bookings
+* Créer une réservation de billets de train.
+
+```bash
+curl --header "Accept: application/json" --header "Content-Type: application/json" --request POST --data '{"current_train":"TR123","number_places":2}' http://localhost:9992/api/trains/bookings
+```
+
+La sortie console attendue :
+
+```
 {"id":"1541683057395","current_train":"TR123","number_places":2}
+```
 
-# Récupérer la liste des réservation de billets de train.
-$ curl --header "Accept: application/json" http://localhost:9992/api/trains/bookings
+* Récupérer la liste des réservation de billets de train.
+
+```bash
+curl --header "Accept: application/json" http://localhost:9992/api/trains/bookings
+```
+
+La sortie console attendue :
+
+```bash
 [{"id":"1541683057395","current_train":"TR123","number_places":2}]
+```
 
-# Récupérer une réservation de billets de train par un identifiant.
-$ curl --header "Accept: application/json" http://localhost:9992/api/trains/bookings/1541683057395
+* Récupérer une réservation de billets de train par un identifiant.
+
+```bash
+curl --header "Accept: application/json" http://localhost:9992/api/trains/bookings/1541683057395
+```
+
+La sortie console attendue :
+
+```bash
 [{"id":"1541683057395","current_train":"TR123","number_places":2}]
+```
 
-# Supprimer une réservation de billets de train par un identifiant (réussie).
-$ curl --request DELETE http://localhost:9992/api/trains/bookings/1541683057395 -v
+* Supprimer une réservation de billets de train par un identifiant (réussie).
+
+```bash
+curl --request DELETE http://localhost:9992/api/trains/bookings/1541683057395 -v
+```
+
+La sortie console attendue :
+
+```bash
 * Connected to localhost (127.0.0.1) port 9992 (#0)
 > DELETE /api/trains/bookings/1541685562466 HTTP/1.1
 > Host: localhost:9992
@@ -435,10 +510,17 @@ $ curl --request DELETE http://localhost:9992/api/trains/bookings/1541683057395 
 < HTTP/1.1 204 No Content
 <
 * Connection #0 to host localhost left intact
+```
 
-# Comme la méthode DELETE est idempotent possibilité de rappeler plusieurs fois
-# la suppression de billets de train pour un même identifiant (réussie).
-$ curl --request DELETE http://localhost:9992/api/trains/bookings/1541683057395 -v
+* Comme la méthode DELETE est idempotent possibilité de rappeler plusieurs fois la suppression de billets de train pour un même identifiant (réussie).
+
+```bash
+curl --request DELETE http://localhost:9992/api/trains/bookings/1541683057395 -v
+```
+
+La sortie console attendue :
+
+```bash
 * Connected to localhost (127.0.0.1) port 9992 (#0)
 > DELETE /api/trains/bookings/1541685562466 HTTP/1.1
 > Host: localhost:9992

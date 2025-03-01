@@ -6,8 +6,8 @@ import java.util.logging.Level;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.Application;
@@ -34,17 +34,17 @@ public class TrainBookingResourceIntegrationTest extends JerseyTest {
 		TrainBooking trainBooking = new TrainBooking();
 		trainBooking.setNumberPlaces(3);
 		trainBooking.setTrainId("TR123");
-		Assert.assertNull(trainBooking.getId());
+		Assertions.assertNull(trainBooking.getId());
 		
 		// When
 		Response response = target("/trains/bookings").request(MediaType.APPLICATION_JSON_TYPE)
 				.post(Entity.entity(trainBooking, MediaType.APPLICATION_JSON));
 
 		// Then
-		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
+		Assertions.assertEquals(Status.OK.getStatusCode(), response.getStatus(), "Http Response should be 200: ");
 		TrainBooking readEntity = response.readEntity(TrainBooking.class);
-		Assert.assertNotNull(readEntity);
-		Assert.assertNotNull(readEntity.getId());
+		Assertions.assertNotNull(readEntity);
+		Assertions.assertNotNull(readEntity.getId());
 	}
 	
 	@Test
@@ -59,7 +59,7 @@ public class TrainBookingResourceIntegrationTest extends JerseyTest {
 				.post(Entity.entity(trainBooking, MediaType.APPLICATION_JSON));
 
 		// Then
-		Assert.assertEquals("Http Response should be 404: ", Status.NOT_FOUND.getStatusCode(), response.getStatus());
+		Assertions.assertEquals(Status.NOT_FOUND.getStatusCode(), response.getStatus(), "Http Response should be 404: ");
 	}
 	
 	private TrainBooking createTrainBooking(String trainId, int numberPlaces) {
@@ -67,7 +67,7 @@ public class TrainBookingResourceIntegrationTest extends JerseyTest {
 		trainBooking.setNumberPlaces(numberPlaces);
 		trainBooking.setTrainId(trainId);
 		Response response = target("/trains/bookings").request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(trainBooking, MediaType.APPLICATION_JSON));
-		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
+		Assertions.assertEquals(Status.OK.getStatusCode(), response.getStatus(), "Http Response should be 200: ");
 				
 		return response.readEntity(TrainBooking.class);
 	}
@@ -81,10 +81,10 @@ public class TrainBookingResourceIntegrationTest extends JerseyTest {
 		Response response = target("/trains/bookings").request(MediaType.APPLICATION_JSON_TYPE).get();
 		
 		// Then
-		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
+		Assertions.assertEquals(Status.OK.getStatusCode(), response.getStatus(), "Http Response should be 200: ");
 		List<TrainBooking> trainBookings = response.readEntity(new GenericType<List<TrainBooking>>() {});
-		Assert.assertEquals(1, trainBookings.size());
-		Assert.assertEquals(currentTrainBooking.getTrainId(), trainBookings.get(0).getTrainId());
+		Assertions.assertEquals(1, trainBookings.size());
+		Assertions.assertEquals(currentTrainBooking.getTrainId(), trainBookings.get(0).getTrainId());
 	}
 
 	@Test
@@ -96,7 +96,7 @@ public class TrainBookingResourceIntegrationTest extends JerseyTest {
 		Response response = target("/trains/bookings").path(currentTrainBooking.getId()).request(MediaType.APPLICATION_JSON_TYPE).get();
 		
 		// Then
-		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
+		Assertions.assertEquals(Status.OK.getStatusCode(), response.getStatus(), "Http Response should be 200: ");
 	}
 	
 	@Test
@@ -108,7 +108,7 @@ public class TrainBookingResourceIntegrationTest extends JerseyTest {
 		Response response = target("/trains/bookings").path(trainBookingId).request(MediaType.APPLICATION_JSON_TYPE).get();
 		
 		// Then
-		Assert.assertEquals("Http Response should be 404: ", Status.NOT_FOUND.getStatusCode(), response.getStatus());
+		Assertions.assertEquals(Status.NOT_FOUND.getStatusCode(), response.getStatus(), "Http Response should be 404: ");
 	}
 	
 	@Test
@@ -120,7 +120,7 @@ public class TrainBookingResourceIntegrationTest extends JerseyTest {
 		Response response = target("/trains/bookings").path(currentTrainBooking.getId()).request(MediaType.APPLICATION_JSON_TYPE).delete();
 		
 		// Then
-		Assert.assertEquals("Http Response should be 204: ", Status.NO_CONTENT.getStatusCode(), response.getStatus());
+		Assertions.assertEquals(Status.NO_CONTENT.getStatusCode(), response.getStatus(), "Http Response should be 204: ");
 	}
 	
 	@Test
@@ -132,6 +132,6 @@ public class TrainBookingResourceIntegrationTest extends JerseyTest {
 		Response response = target("/trains/bookings").path(trainBookingId).request(MediaType.APPLICATION_JSON_TYPE).delete();
 		
 		// Then
-		Assert.assertEquals("Http Response should be 204: ", Status.NO_CONTENT.getStatusCode(), response.getStatus());
+		Assertions.assertEquals(Status.NO_CONTENT.getStatusCode(), response.getStatus(), "Http Response should be 204: ");
 	}
 }

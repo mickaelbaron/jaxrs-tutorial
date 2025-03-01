@@ -1,5 +1,7 @@
 package fr.mickaelbaron.jaxrstutorialexercice2;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -14,7 +16,7 @@ public class Train {
 
 	private String arrival;
 
-	//@JsonProperty("departure_time")
+	@JsonProperty("departure_time")
 	private int departureTime; // Format : 1230 = 12h30
 
 	public Train() {

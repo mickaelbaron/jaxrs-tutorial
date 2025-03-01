@@ -9,10 +9,10 @@
 	<name>HelloWorld ENSMA Application</name>
 
 	<properties>
-		<jersey.version>3.0.2</jersey.version>
-		<jaxb.version>3.0.1</jaxb.version>
+		<jersey.version>3.1.10</jersey.version>
+		<jaxb.version>4.0.2</jaxb.version>
 
-		<maven.compiler.version>3.8.1</maven.compiler.version>
+		<maven.compiler.version>3.14.0</maven.compiler.version>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 	</properties>

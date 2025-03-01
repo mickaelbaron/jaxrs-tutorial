@@ -11,11 +11,11 @@ Le service web REST de ce premier exercice fournit un accès à la ressource «�
 
 ## Étapes à suivre
 
-* Démarrer l'environnement de développement Eclipse.
+* Démarrer l'éditeur [VSCode](https://code.visualstudio.com/ "Visual Studio Code").
 
-* Importer le projet Maven **jaxrs-tutorial-exercice1** (**File -> Import -> Maven -> Existing Maven Projects**), choisir le répertoire du projet, puis faire **Finish**.
+* Ouvrir le dossier du projet Maven **jaxrs-tutorial-exercice1**.
 
-* Créer une classe qui représentera la ressource « Hello » (**File -> New** puis choisir **Class**). Appeler la classe `HelloResource` et la définir dans le package `fr.mickaelbaron.jaxrstutorialexercice1`.
+* Créer une classe `HelloResource` dans le package `fr.mickaelbaron.jaxrstutorialexercice1` qui représentera la ressource « Hello ».
 
 * Dans la nouvelle classe créée, ajouter l'annotation `@Path("Hello")` pour préciser que la ressource sera accessible via le chemin */hello* et l'annotation `@Produces(MediaType.TEXT_PLAIN)` pour indiquer que le contenu retourné au client sera de type texte (`text/plain`).
 
@@ -100,7 +100,12 @@ Ce service web REST n'est pas complet, puisqu'il n'est pas possible de paramétr
 * Depuis une invite de commande saisir la commande suivante :
 
 ```bash
-$ curl --header "name:Mickael BARON" http://localhost:9991/api/hello/ENSMA
+curl --header "name:Mickael BARON" http://localhost:9991/api/hello/ENSMA
+```
+
+La sortie console attendue :
+
+```bash
 Bonjour ENSMA de la part de Mickael BARON
 ```
 
@@ -120,7 +125,12 @@ Ce service web REST n'est toujours pas complet puisque nous aimerions retourner 
 * Exécuter de nouveau la classe `HelloLauncher` puis saisir la ligne de commande **cURL** suivante pour envoyer une requête avec les bons paramètres et détailler le retour de la réponse.
 
 ```bash
-$ curl --header "name:Mickael BARON" http://localhost:9991/api/hello/withheaders/ENSMA -v
+curl --header "name:Mickael BARON" http://localhost:9991/api/hello/withheaders/ENSMA -v
+```
+
+La sortie console attendue :
+
+```bash
 *   Trying ::1...
 * TCP_NODELAY set
 * Connection failed

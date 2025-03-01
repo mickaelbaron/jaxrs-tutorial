@@ -1,5 +1,7 @@
 package fr.mickaelbaron.jaxrstutorialexercice2;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -10,10 +12,10 @@ public class TrainBooking {
 
 	private String id;
 
-	//@JsonProperty("current_train")
+	@JsonProperty("current_train")
 	private String trainId;
 
-	//@JsonProperty("number_places")
+	@JsonProperty("number_places")
 	private int numberPlaces;
 
 	public String getId() {

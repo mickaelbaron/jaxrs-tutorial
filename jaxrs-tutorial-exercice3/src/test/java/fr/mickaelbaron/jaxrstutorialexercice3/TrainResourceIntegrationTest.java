@@ -6,8 +6,8 @@ import java.util.logging.Level;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import jakarta.ws.rs.core.Application;
 import jakarta.ws.rs.core.GenericType;
@@ -35,12 +35,12 @@ public class TrainResourceIntegrationTest extends JerseyTest {
 		Response response = target("/trains").request(MediaType.APPLICATION_JSON_TYPE).get();
 
 		// Then
-		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
+		Assertions.assertEquals(Status.OK.getStatusCode(), response.getStatus(), "Http Response should be 200: ");
 		List<Train> readEntities = response.readEntity(new GenericType<List<Train>>() {
 		});
-		Assert.assertNotNull(readEntities);
-		Assert.assertEquals(3, readEntities.size());
-		Assert.assertTrue(readEntities.stream().anyMatch(current -> "TR123".equals(current.getId())));
+		Assertions.assertNotNull(readEntities);
+		Assertions.assertEquals(3, readEntities.size());
+		Assertions.assertTrue(readEntities.stream().anyMatch(current -> "TR123".equals(current.getId())));
 	}
 
 	@Test
@@ -52,11 +52,11 @@ public class TrainResourceIntegrationTest extends JerseyTest {
 		Response response = target("/trains").path("trainid-" + trainId).request(MediaType.APPLICATION_JSON_TYPE).get();
 
 		// Then
-		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
-		Assert.assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType());
+		Assertions.assertEquals(Status.OK.getStatusCode(), response.getStatus(), "Http Response should be 200: ");
+		Assertions.assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType());
 		Train readEntity = response.readEntity(Train.class);
-		Assert.assertNotNull(readEntity);
-		Assert.assertEquals("Poitiers", readEntity.getDeparture());
+		Assertions.assertNotNull(readEntity);
+		Assertions.assertEquals("Poitiers", readEntity.getDeparture());
 	}
 
 	@Test
@@ -72,13 +72,13 @@ public class TrainResourceIntegrationTest extends JerseyTest {
 				.request(MediaType.APPLICATION_JSON_TYPE).get();
 
 		// Then
-		Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
-		Assert.assertEquals(departure, response.getHeaderString("departure"));
-		Assert.assertEquals(arrival, response.getHeaderString("arrival"));
-		Assert.assertEquals(departureTime, response.getHeaderString("departure_time"));
+		Assertions.assertEquals(Status.OK.getStatusCode(), response.getStatus(), "Http Response should be 200: ");
+		Assertions.assertEquals(departure, response.getHeaderString("departure"));
+		Assertions.assertEquals(arrival, response.getHeaderString("arrival"));
+		Assertions.assertEquals(departureTime, response.getHeaderString("departure_time"));
 		List<Train> readEntities = response.readEntity(new GenericType<List<Train>>() {
 		});
-		Assert.assertNotNull(readEntities);
-		Assert.assertEquals(2, readEntities.size());
+		Assertions.assertNotNull(readEntities);
+		Assertions.assertEquals(2, readEntities.size());
 	}
 }

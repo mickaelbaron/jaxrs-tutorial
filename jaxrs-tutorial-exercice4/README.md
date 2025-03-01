@@ -123,7 +123,7 @@ public class TrainBooking {
 * Compléter la méthode `callGetTrainBookings` permettant de récupérer l'ensemble des réservations de billet de train et de les afficher sur la sorite console.
 
 ```java
-    private void callGetTrainBookings() {
+    public Integer callGetTrainBookings() {
         // TODO: invoquer le service web REST pour récupérer l'ensemble des réservations
         // de billet de train.
 
@@ -139,6 +139,7 @@ public class TrainBooking {
 
             return 1;
         }
+    }
 ```
 
 Tester votre programme client en invoquant les trois commandes `trains`, `trainbooking` et `trainbookings` développées précédemment.

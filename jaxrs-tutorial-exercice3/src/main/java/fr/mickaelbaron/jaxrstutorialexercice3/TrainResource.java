@@ -49,14 +49,14 @@ public class TrainResource {
 			@QueryParam("arrival") String arrival, @QueryParam("departure_time") String departureTime) {
 		System.out.println("TrainResource.searchTrainsByCriteria()");
 
-		return Response.ok().header("departure", departure).header("arrival", arrival)
-				.header("departure_time", departureTime).entity(TrainBookingDB.getTrains().subList(0, 2)).build();
+		return Response.ok().header("departure", departure).header("arrival", arrival).header("departure_time", departureTime)
+				.entity(TrainBookingDB.getTrains().subList(0, 2)).build();
 	}
 
 	@Path("/bookings")
 	public TrainBookingResource getTrainBookingResource() {
 		System.out.println("TrainResource.getTrainBookingResource()");
-
+		
 		return new TrainBookingResource();
 	}
 }

@@ -9,14 +9,14 @@
 	<name>TrainBooking Client</name>
 
 	<properties>
-		<jersey.version>3.0.2</jersey.version>
-		<jaxb.version>3.0.1</jaxb.version>
+		<jersey.version>3.1.10</jersey.version>
+		<jaxb.version>4.0.2</jaxb.version>
 
-		<maven.compiler.version>3.1</maven.compiler.version>
+		<maven.compiler.version>3.14.0</maven.compiler.version>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 
-		<maven.dependency.version>3.1.1</maven.dependency.version>
+		<maven.dependency.version>3.8.1</maven.dependency.version>
 	</properties>
 
 	<dependencyManagement>
@@ -92,7 +92,6 @@
 			<id>war</id>
 			<properties>
 				<project.packaging>war</project.packaging>
-				<maven.war.webxml>TODO</maven.war.webxml>
 			</properties>
 			<dependencies>
 				<dependency>
@@ -102,6 +101,13 @@
 			</dependencies>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webXml>TODO</webXml>
+						</configuration>
+					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-compiler-plugin</artifactId>

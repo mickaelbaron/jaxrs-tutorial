@@ -9,10 +9,11 @@
 	<name>TrainBooking Client</name>
 
 	<properties>
-		<jersey.version>3.0.2</jersey.version>
-		<jaxb.version>3.0.1</jaxb.version>
+		<jersey.version>3.1.10</jersey.version>
+		<jaxb.version>4.0.2</jaxb.version>
+		<picocli.version>4.7.6</picocli.version>
 
-		<maven.compiler.version>3.1</maven.compiler.version>
+		<maven.compiler.version>3.14.0</maven.compiler.version>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 	</properties>
@@ -42,6 +43,11 @@
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-jackson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>info.picocli</groupId>
+			<artifactId>picocli</artifactId>
+			<version>${picocli.version}</version>
 		</dependency>
 	</dependencies>
 

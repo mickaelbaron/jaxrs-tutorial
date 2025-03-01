@@ -24,14 +24,16 @@ public class TrainBookingLauncher {
 	public static void main(String[] args) {
 		ResourceConfig rc = new ResourceConfig();
 		rc.registerClasses(TrainResource.class);
-		rc.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, Level.WARNING.getName());
-
+		rc.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, Level.INFO.getName());
+		rc.property("org.glassfish.jersey.logging.LoggingInterceptor", Level.WARNING.getName());
+		
 		try {
 			HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
 			server.start();
 
 			System.out.println(String.format(
-					"Jersey app started with WADL available at " + "%s\nHit enter to stop it...", BASE_URI, BASE_URI));
+					"Jersey app started with WADL available at " + "%s\nHit enter to stop it...",
+					BASE_URI, BASE_URI));
 
 			System.in.read();
 			server.shutdownNow();

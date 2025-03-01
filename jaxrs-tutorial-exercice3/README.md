@@ -12,13 +12,13 @@ Dans la suite de cet exercice le format de représentation des objets sera du JS
 
 ## Étapes à suivre
 
-* Démarrer l'environnement de développement Eclipse.
+* Démarrer l'éditeur [VSCode](https://code.visualstudio.com/ "Visual Studio Code").
 
-* Importer le projet Maven **jaxrs-tutorial-exercice3** (**File -> Import -> Maven -> Existing Maven Projects**), choisir le répertoire du projet, puis faire **Finish**.
+* Ouvrir le dossier du projet Maven **jaxrs-tutorial-exercice3**.
 
 > Le projet importé contient déjà une implémentation complète du service web REST dédié à l'interrogation et la réservation de billets de train.
 
-* Éditer le fichier de description Maven *pom.xml* et ajouter les dépendances suivantes afin d'utiliser le framework de test Test-Framework de Jersey.
+* Éditer le fichier de description Maven _pom.xml_ et ajouter les dépendances suivantes afin d'utiliser le framework de test *Test-Framework* de Jersey qui s'appuie sur la version 5 de [JUnit](https://junit.org/junit5/).
 
 ```xml
 <dependency>
@@ -57,13 +57,17 @@ public class TrainResourceIntegrationTest extends JerseyTest {
         Response response = target("/trains").request(MediaType.APPLICATION_JSON_TYPE).get();
 
         // Then
-        Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
+        Assertions.assertEquals(Status.OK.getStatusCode(), response.getStatus(), "Http Response should be 200: ");
         List<Train> readEntities = response.readEntity(new GenericType<List<Train>>() {});
-        Assert.assertNotNull(readEntities);
-        Assert.assertEquals(3, readEntities.size());
-        Assert.assertTrue(readEntities.stream().anyMatch(current -> "TR123".equals(current.getId())));
+        Assertions.assertNotNull(readEntities);
+        Assertions.assertEquals(3, readEntities.size());
+        Assertions.assertTrue(readEntities.stream().anyMatch(current -> "TR123".equals(current.getId())));
     }
 ```
+
+* Exécuter le test de la méthode `getTrainsTest` en vous assurant que le test passe.
+
+> Dans la suite de cet exercice, compléter les sections `TODO` de chaque méthode de test. Une fois cela fait, exécuter le test correspondant pour vérifier son bon fonctionnement.
 
 * Compléter la méthode `getTrainTest` au niveau de la partie *When* afin de satisfaire les différentes assertions.
 
@@ -78,11 +82,11 @@ public class TrainResourceIntegrationTest extends JerseyTest {
         // par son identifiant fonctionnel (trainid = "TR123").
 
         // Then
-        Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
-        Assert.assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType());
+        Assertions.assertEquals(Status.OK.getStatusCode(), response.getStatus(), "Http Response should be 200: ");
+        Assertions.assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType());
         Train readEntity = response.readEntity(Train.class);
-        Assert.assertNotNull(readEntity);
-        Assert.assertEquals("Poitiers", readEntity.getDeparture());
+        Assertions.assertNotNull(readEntity);
+        Assertions.assertEquals("Poitiers", readEntity.getDeparture());
     }
 ```
 
@@ -196,7 +200,7 @@ public class TrainResourceIntegrationTest extends ??? {
         // d'une réservation de billets de train à partir de currentTrainBooking.getId().
 
         // Then
-        Assert.assertEquals("Http Response should be 200: ", Status.OK.getStatusCode(), response.getStatus());
+        Assertions.assertEquals(Status.OK.getStatusCode(), response.getStatus(), "Http Response should be 200: ");
     }
 ```
 

@@ -14,7 +14,7 @@ Avant de démarrer cette série d'exercices sur l'utilisation de l'API JAX-RS, v
 
 * [Java via OpenJDK](https://jdk.java.net/ "Java") ;
 * [Maven](https://maven.apache.org/ "Maven") ;
-* [Eclipse](https://www.eclipse.org/ "Eclipse") ;
+* [VSCode](https://code.visualstudio.com/ "Visual Studio Code") et le [pack d'extension pour Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack "Extension Pack for Java") ;
 * [cURL](https://curl.haxx.se "cURL") ;
 * [Docker (exercice 5)](https://www.docker.com/ "Docker").
 

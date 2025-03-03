@@ -183,8 +183,7 @@ Tester votre programme client en invoquant les trois commandes `trains`, `trainb
 
 * Exécuter les trois configuraations appelées `TrainBookingsCLIMain-Trains`, `TrainBookingsCLIMain-TrainBooking` et `TrainBookingsCLIMain-TrainBookings`. Le résultat attendu est le suivant.
 
-bash
-```
+```bash
 # Lister l'ensemble des trains disponibles
 # java -cp '...' fr.mickaelbaron.jaxrstutorialexercice4.TrainBookingsCLIMain trains
 TR123 - Poitiers - Paris - 1250

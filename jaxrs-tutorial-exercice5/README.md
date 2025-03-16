@@ -6,14 +6,14 @@ Le projet contient tout le code du service web REST.
 
 ## But
 
-* Déployer comme une application Java classique (exécuter depuis un fichier jar).
-* Packager un service web REST dans une archive war.
-* Déployer un service web REST sur le serveur d'applications Java Tomcat.
-* Gérer les problèmes de dépendances.
+- Déployer comme une application Java classique (exécuter depuis un fichier jar).
+- Packager un service web REST dans une archive war.
+- Déployer un service web REST sur le serveur d'applications Java Tomcat.
+- Gérer les problèmes de dépendances.
 
 ## Étapes à suivre pour effectuer un déploiement comme une application Java classique
 
-* Saisir la ligne de commande suivante depuis la racine du projet pour compiler et construire le fichier jar du projet.
+- Saisir la ligne de commande suivante depuis la racine du projet pour compiler et construire le fichier jar du projet.
 
 ```bash
 mvn clean package
@@ -63,7 +63,7 @@ La sortie console attendue :
 [INFO] ------------------------------------------------------------------------
 ```
 
-* Saisir la ligne de commande suivante pour démarrer le projet.
+- Saisir la ligne de commande suivante pour démarrer le projet.
 
 ```bash
 java -cp "target/jaxrstutorialexercice5.jar" fr.mickaelbaron.jaxrstutorialexercice5.TrainBookingLauncher
@@ -84,7 +84,7 @@ Caused by: java.lang.ClassNotFoundException: jakarta.ws.rs.core.UriBuilder
 
 Vous remarquerez que le projet ne démarre pas du fait de l'absence de certaines dépendances. Il est donc obligatoire de fournir les dépendances nécessaires lors de l'exécution (dans le classpath).
 
-* Modifier le fichier _pom.xml_ afin d'ajouter le plugin **maven-dependency-plugin** qui permettra de lister toutes les bibliothèques nécessaires.
+- Modifier le fichier _pom.xml_ afin d'ajouter le plugin **maven-dependency-plugin** qui permettra de lister toutes les bibliothèques nécessaires.
 
 ```xml
 <plugin>
@@ -103,7 +103,7 @@ Vous remarquerez que le projet ne démarre pas du fait de l'absence de certaines
 </plugin>
 ```
 
-* Saisir les lignes de commande suivantes pour compiler, construire et démarrer le projet.
+- Saisir les lignes de commande suivantes pour compiler, construire et démarrer le projet.
 
 ```bash
 mvn clean package
@@ -126,13 +126,13 @@ Hit enter to stop it...
 
 Pour un déploiement de service web REST avec Jersey vers un serveur d'applications il est nécessaire de 1) fournir un fichier _web.xml_ où il est précisé le package des ressouces ; 2) construire le fichier war ; 3) fournir au serveur d'application le fichier war.
 
-* Éditer le fichier _src/main/configuration/web.xml_ et ajouter la déclaration de la classe `TrainBookingApplication`.
+- Éditer le fichier _src/main/configuration/web.xml_ et ajouter la déclaration de la classe `TrainBookingApplication`.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
     version="3.1">
     <display-name>HelloWorldRestWebService</display-name>
@@ -152,7 +152,7 @@ Pour un déploiement de service web REST avec Jersey vers un serveur d'applicati
 </web-app>
 ```
 
-* Éditer le fichier _pom.xml_ et à la ligne 122, préciser le chemin et le nom du fichier _web.xml_ qui sera utilisé comme descripteur pour l'application web Java.
+- Éditer le fichier _pom.xml_ et à la ligne 122, préciser le chemin et le nom du fichier _web.xml_ qui sera utilisé comme descripteur pour l'application web Java.
 
 ```xml
 <configuration>
@@ -160,7 +160,7 @@ Pour un déploiement de service web REST avec Jersey vers un serveur d'applicati
 </configuration>
 ```
 
-* Saisir la ligne de commande suivante pour compiler et construire le projet vers un fichier war.
+- Saisir la ligne de commande suivante pour compiler et construire le projet vers un fichier war.
 
 ```bash
 mvn clean package -P war
@@ -170,7 +170,7 @@ mvn clean package -P war
 
 Pour exécuter le serveur d'application [Tomcat](https://tomcat.apache.org/) qui exposera l'application que nous avons développée, nous utiliserons [Docker](https://www.docker.com/).
 
-* Saisir la ligne de commande suivante pour télécharger une image Docker de Tomcat.
+- Saisir la ligne de commande suivante pour télécharger une image Docker de Tomcat.
 
 ```bash
 docker pull tomcat:jre11-openjdk-slim
@@ -196,7 +196,7 @@ What's next:
     View a summary of image vulnerabilities and recommendations → docker scout quickview tomcat:jre11-openjdk-slim
 ```
 
-* Saisir la ligne de commande suivante pour créer un conteneur Docker qui permettra de démarrer une instance de Tomcat. Le fichier _jaxrstutorialexercice5.war_ contient tous les codes et dépendances de ce projet.
+- Saisir la ligne de commande suivante pour créer un conteneur Docker qui permettra de démarrer une instance de Tomcat. Le fichier _jaxrstutorialexercice5.war_ contient tous les codes et dépendances de ce projet.
 
 ```bash
 docker run --rm --name helloworldrestservice-tomcat -v $(pwd)/target/jaxrstutorialexercice5.war:/usr/local/tomcat/webapps/jaxrstutorialexercice5.war -it -p 8080:8080 tomcat:jre11-openjdk-slim
@@ -216,7 +216,7 @@ NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED -
 ...
 ```
 
-* Tester le service web REST déployé avec **cURL**.
+- Tester le service web REST déployé avec **cURL**.
 
 ```bash
 # Récupérer l'ensemble des trains au format XML

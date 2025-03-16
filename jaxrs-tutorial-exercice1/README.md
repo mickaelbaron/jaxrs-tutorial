@@ -4,20 +4,20 @@ Le service web REST de ce premier exercice fournit un accès à la ressource «�
 
 ## But
 
-* Développer un service web REST à partir d'une classe Java.
-* Déployer le service web REST comme une application Java classique.
-* Afficher le contrat de description WADL.
-* Tester le service web REST avec **cURL**.
+- Développer un service web REST à partir d'une classe Java.
+- Déployer le service web REST comme une application Java classique.
+- Afficher le contrat de description WADL.
+- Tester le service web REST avec **cURL**.
 
 ## Étapes à suivre
 
-* Démarrer l'éditeur [VSCode](https://code.visualstudio.com/ "Visual Studio Code").
+- Démarrer l'éditeur [VSCode](https://code.visualstudio.com/ "Visual Studio Code").
 
-* Ouvrir le dossier du projet Maven **jaxrs-tutorial-exercice1**.
+- Ouvrir le dossier du projet Maven **jaxrs-tutorial-exercice1**.
 
-* Créer une classe `HelloResource` dans le package `fr.mickaelbaron.jaxrstutorialexercice1` qui représentera la ressource « Hello ».
+- Créer une classe `HelloResource` dans le package `fr.mickaelbaron.jaxrstutorialexercice1` qui représentera la ressource « Hello ».
 
-* Dans la nouvelle classe créée, ajouter l'annotation `@Path("Hello")` pour préciser que la ressource sera accessible via le chemin */hello* et l'annotation `@Produces(MediaType.TEXT_PLAIN)` pour indiquer que le contenu retourné au client sera de type texte (`text/plain`).
+- Dans la nouvelle classe créée, ajouter l'annotation `@Path("Hello")` pour préciser que la ressource sera accessible via le chemin _/hello_ et l'annotation `@Produces(MediaType.TEXT_PLAIN)` pour indiquer que le contenu retourné au client sera de type texte (`text/plain`).
 
 ```java
 @Path("hello")
@@ -27,7 +27,7 @@ public class HelloResource {
 }
 ```
 
-* Ajouter une première méthode `String getHello()` permettant de retourner une constante de type chaîne de caractères `Bonjour ENSMA` (ou autre texte de votre création).
+- Ajouter une première méthode `String getHello()` permettant de retourner une constante de type chaîne de caractères `Bonjour ENSMA` (ou autre texte de votre création).
 
 ```java
     @GET
@@ -36,7 +36,7 @@ public class HelloResource {
     }
 ```
 
-* Compléter la classe `HelloLauncher` dans le package `fr.mickaelbaron.jaxrstutorialexercice1`. Cette classe sera utilisée pour publier localement notre service web REST.
+- Compléter la classe `HelloLauncher` dans le package `fr.mickaelbaron.jaxrstutorialexercice1`. Cette classe sera utilisée pour publier localement notre service web REST.
 
 ```java
 public class HelloLauncher {
@@ -69,7 +69,7 @@ public class HelloLauncher {
 }
 ```
 
-* Afin de résoudre les problèmes de dépendances vers le serveur Grizzly, compléter le fichier de description Maven *pom.xml*.
+- Afin de résoudre les problèmes de dépendances vers le serveur Grizzly, compléter le fichier de description Maven _pom.xml_.
 
 ```xml
 <dependency>
@@ -78,13 +78,13 @@ public class HelloLauncher {
 </dependency>
 ```
 
-* Exécuter la classe `HelloLauncher`.
+- Exécuter la classe `HelloLauncher`.
 
-* Ouvrir une fenêtre d'un navigateur web et tester la récupération de la ressource « Hello » (requête GET via l'URL <http://localhost:9991/api/hello>).
+- Ouvrir une fenêtre d'un navigateur web et tester la récupération de la ressource « Hello » (requête GET via l'URL <http://localhost:9991/api/hello>).
 
-Ce service web REST n'est pas complet, puisqu'il n'est pas possible de paramétrer le message de bienvenue (utilisation de *template parameter*) ni de connaître l'auteur du message de bienvenue (utilisation d'un paramètre d'en-tête).
+Ce service web REST n'est pas complet, puisqu'il n'est pas possible de paramétrer le message de bienvenue (utilisation de _template parameter_) ni de connaître l'auteur du message de bienvenue (utilisation d'un paramètre d'en-tête).
 
-* Ajouter une nouvelle méthode Java `getHello` dans la classe `HelloResource` qui prend en paramètre une chaîne de caractères initialisée par un _template parameter_ (annotations `@Path` et `@PathParam`) et une autre chaîne de caractères initialisée par un paramètre d'en-tête (annotation `@HeaderParam`) dont la clé sera `name`. La valeur par défaut de l'en-tête sera fixée `votre serviteur` (annotation `@DefaultValue`).
+- Ajouter une nouvelle méthode Java `getHello` dans la classe `HelloResource` qui prend en paramètre une chaîne de caractères initialisée par un _template parameter_ (annotations `@Path` et `@PathParam`) et une autre chaîne de caractères initialisée par un paramètre d'en-tête (annotation `@HeaderParam`) dont la clé sera `name`. La valeur par défaut de l'en-tête sera fixée `votre serviteur` (annotation `@DefaultValue`).
 
 ```java
     @GET
@@ -95,9 +95,9 @@ Ce service web REST n'est pas complet, puisqu'il n'est pas possible de paramétr
     }
 ```
 
-* Exécuter de nouveau la classe `HelloLauncher` et depuis votre navigateur web saisir l'URL permettant d'invoquer ce nouveau service web REST (requête GET via l'URL <http://localhost:9991/api/hello/ENSMA>). Malheureusement, le navigateur web ne permet pas de préciser la valeur du paramètre d'en-tête `name`. Nous utiliserons donc l'outil en ligne de commande **cURL** pour construire des requêtes HTTP complexes.
+- Exécuter de nouveau la classe `HelloLauncher` et depuis votre navigateur web saisir l'URL permettant d'invoquer ce nouveau service web REST (requête GET via l'URL <http://localhost:9991/api/hello/ENSMA>). Malheureusement, le navigateur web ne permet pas de préciser la valeur du paramètre d'en-tête `name`. Nous utiliserons donc l'outil en ligne de commande **cURL** pour construire des requêtes HTTP complexes.
 
-* Depuis une invite de commande saisir la commande suivante :
+- Depuis une invite de commande saisir la commande suivante :
 
 ```bash
 curl --header "name:Mickael BARON" http://localhost:9991/api/hello/ENSMA
@@ -111,7 +111,7 @@ Bonjour ENSMA de la part de Mickael BARON
 
 Ce service web REST n'est toujours pas complet puisque nous aimerions retourner dans l'en-tête de la réponse l'auteur du message de bienvenue. Comment pourrions-nous retourner à la fois un contenu dans la réponse et une information dans l'en-tête de la réponse ? Pour cela, nous allons utiliser un objet `Response` pour le retour de méthode.
 
-* Ajouter une nouvelle méthode Java `getHelloWithHeaders` dans la classe `HelloResource` qui possède les mêmes paramètres que la précédente méthode. Le chemin pour invoquer cette méthode sera `withheaders/{id}` où `id` est le paramètre du message de bienvenue. Dans le corps de la méthode `getHelloWithHeaders`, compléter le code ci-dessous afin de transmettre le nom de l'auteur dans l'en-tête de la réponse.
+- Ajouter une nouvelle méthode Java `getHelloWithHeaders` dans la classe `HelloResource` qui possède les mêmes paramètres que la précédente méthode. Le chemin pour invoquer cette méthode sera `withheaders/{id}` où `id` est le paramètre du message de bienvenue. Dans le corps de la méthode `getHelloWithHeaders`, compléter le code ci-dessous afin de transmettre le nom de l'auteur dans l'en-tête de la réponse.
 
 ```java
     @GET
@@ -122,7 +122,7 @@ Ce service web REST n'est toujours pas complet puisque nous aimerions retourner 
     }
 ```
 
-* Exécuter de nouveau la classe `HelloLauncher` puis saisir la ligne de commande **cURL** suivante pour envoyer une requête avec les bons paramètres et détailler le retour de la réponse.
+- Exécuter de nouveau la classe `HelloLauncher` puis saisir la ligne de commande **cURL** suivante pour envoyer une requête avec les bons paramètres et détailler le retour de la réponse.
 
 ```bash
 curl --header "name:Mickael BARON" http://localhost:9991/api/hello/withheaders/ENSMA -v
@@ -153,7 +153,7 @@ La sortie console attendue :
 Bonjour ENSMA de la part de (voir l'en-tête).
 ```
 
-* Nous allons afficher le contrat de description de ce service web REST au format WADL. Saisir depuis un navigateur l'URL suivante : <http://localhost:9991/api/application.wadl>.
+- Nous allons afficher le contrat de description de ce service web REST au format WADL. Saisir depuis un navigateur l'URL suivante : <http://localhost:9991/api/application.wadl>.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
